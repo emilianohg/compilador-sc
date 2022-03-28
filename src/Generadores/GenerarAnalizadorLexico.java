@@ -17,7 +17,7 @@ public class GenerarAnalizadorLexico {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        String path = "C:\\Users\\Jose\\Documents\\NetBeansProjects\\KidCode\\src\\Lexico\\kidcode.flex";
+        String path = "C:\\dev\\KidCode\\src\\Lexico\\kidcode.flex";
         generarLexer(path);
     }
 

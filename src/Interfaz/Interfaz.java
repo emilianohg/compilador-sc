@@ -516,8 +516,10 @@ public class Interfaz extends javax.swing.JFrame {
             Logger.getLogger(Interfaz.class.getName()).log(Level.SEVERE, null, ex);
         }
         TblAnalisis.setModel(modelo);
-        PnlToken.setVisible(true);
-        splitPaneEC.setDividerLocation(0.70);
+        this.writeMessageInConsole(
+            "Analisis léxico funcionando correctamente.",
+            TypeConsoleMessage.INFO
+        );
     }//GEN-LAST:event_btnAnalizadorLexicoActionPerformed
 
     private void txtCodeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodeKeyTyped
@@ -689,8 +691,9 @@ public class Interfaz extends javax.swing.JFrame {
                     break;
                 }
                 if (lexico.nameToken.equals("ERROR")) {
+                    System.out.println(lexico.numLinea());
                     this.writeMessageInConsole(
-                        "Token no identificado.\n\t Token: " + lexico.yytext(),
+                        "Token no identificado.\n\tLinea: " + lexico.numLinea() + "\n\tValor: " + lexico.yytext(),
                         TypeConsoleMessage.ERROR
                     );
                     return true;
