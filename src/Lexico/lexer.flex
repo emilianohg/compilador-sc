@@ -27,7 +27,7 @@ ESPACIO=[ \t\r\n]
 %{
 
 
-public Pintar estilo = new Pintar();
+public PaintTextBox estilo = new PaintTextBox();
 
 public String nameToken = null;
 public int numLinea(){
@@ -245,8 +245,8 @@ public String getCodigo(){
 
 "\"" ({Letras}|{Digitos}|{Operador}|{Agrupacion}|{Simbolo})* "\"" 
 {
-    nameToken = "TEXT";
-    return new Symbol(sym.VALOR_STRING, yychar,yyline,new String(yytext()));
+    nameToken = "VAL_TEXT";
+    return new Symbol(sym.VAL_TEXT, yychar,yyline,new String(yytext()));
 }
 
 

@@ -1,6 +1,6 @@
 package Sintactico;
 import java_cup.runtime.*;
-import Lexico.Pintar;
+import Lexico.PaintTextBox;
 action code {:
     
 :}
@@ -8,7 +8,7 @@ parser code
 {:
     public Symbol simboloAnterior;
     public Nodo nodoPrincipal;
-    public Pintar estilo = new Pintar();
+    public PaintTextBox estilo = new PaintTextBox();
     private int guia = 0;
     private int conError = 0;
     public String textError = "";
@@ -61,7 +61,7 @@ terminal
     NUMBER_INTEGER,
     SEMICOLON,
     NUMBER_FLOAT,
-    TEXT,
+    VAL_TEXT,
     PAREN_OPEN,
     PAREN_CLOSE, 
     CURLY_BRACE_OPEN,
@@ -769,11 +769,11 @@ TIPO_VALOR ::=
         RESULT = raiz;        
         System.out.println("<TIPO_VALOR><TIPO_VALOR_COMPATIBLE>");  
     :}
-     |TEXT:n1
+     |VAL_TEXT:n1
      {:
         Nodo raiz = new Nodo("TIPO_VALOR","",parser.guia);        
         getGuia();  
-        Nodo nd1 = new Nodo("TEXT",n1.toString(),parser.guia);
+        Nodo nd1 = new Nodo("VAL_TEXT",n1.toString(),parser.guia);
         getGuia();  
         raiz.addRaiz(nd1);
         RESULT = raiz;

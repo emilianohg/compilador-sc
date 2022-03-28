@@ -43,7 +43,7 @@ node25[label="IDENTIFIER
 node24[label="TIPO_VALOR_COMPATIBLE"]
 node26[label="TIPO_VALOR"]
 node31[label="OPER_REL
-<<>"]
+<>>"]
 node28[label="IDENTIFIER
 <pi>"]
 node27[label="TIPO_VALOR_COMPATIBLE"]
@@ -63,8 +63,8 @@ node36[label="IDENTIFIER
 <pi>"]
 node35[label="TIPO_VALOR_COMPATIBLE"]
 node37[label="TIPO_VALOR"]
-node39[label="OPER_ART_SUMA
-<+>"]
+node39[label="OPER_ART_MUL
+<*>"]
 node38[label="OPERADOR_ARITMETICO"]
 node41[label="VALOR_ENT
 <2>"]
@@ -88,15 +88,15 @@ node51[label="IDENTIFIER
 node50[label="LISTA_VARIABLES"]
 node63[label="OPER_ASIG_IGUAL
 <=>"]
-node53[label="VALOR_ENT
-<13>"]
+node53[label="IDENTIFIER
+<pi>"]
 node52[label="TIPO_VALOR_COMPATIBLE"]
 node54[label="TIPO_VALOR"]
-node56[label="OPER_ART_MUL
-<*>"]
+node56[label="OPER_ART_SUMA
+<+>"]
 node55[label="OPERADOR_ARITMETICO"]
-node58[label="IDENTIFIER
-<pi>"]
+node58[label="VALOR_ENT
+<1>"]
 node57[label="TIPO_VALOR_COMPATIBLE"]
 node59[label="TIPO_VALOR"]
 node60[label="LISTA_VALORES_EXP"]
@@ -113,9 +113,25 @@ node77[label="PUNTO Y COMO
 <;>"]
 node76[label="ESTRUCTURAS"]
 node78[label="CODIGO"]
-node79[label="INIT"]
+node86[label="VARIABLE
+<var>"]
+node80[label="IDENTIFIER
+<x>"]
+node79[label="LISTA_VARIABLES"]
+node84[label="OPER_ASIG_IGUAL
+<=>"]
+node82[label="VAL_TEXT
+<Hola mundo> "]
+node81[label="TIPO_VALOR"]
+node83[label="ASIGNACION"]
+node85[label="DECLARACION"]
+node88[label="PUNTO Y COMO
+<;>"]
+node87[label="ESTRUCTURAS"]
+node89[label="CODIGO"]
+node90[label="INIT"]
 
-node79->node78->node23->node11->node9->node7->node8
+node90->node89->node78->node23->node11->node9->node7->node8
 node7->node5->node0->node1
 
 node5->node6
@@ -192,6 +208,17 @@ node64->node65
 node67->node75
 
 node76->node77
+
+
+node89->node87->node85->node86
+node85->node83->node79->node80
+
+node83->node84
+node83->node81->node82
+
+
+
+node87->node88
 
 
 

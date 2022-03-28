@@ -385,7 +385,7 @@ public class Interfaz extends javax.swing.JFrame {
             datos = "node" + n.getNumeroGuia() + "[label=\"" + n.getNombreRaiz() + "\"]";
         } else {
             //Hoja
-            if (n.getNombreRaiz().equals("TEXT")) {
+            if (n.getNombreRaiz().equals("VAL_TEXT")) {
                 String valor = n.getValor().replace("\"", "");
                 datos += "node" + n.getNumeroGuia() + "[label=\"" + n.getNombreRaiz() + "\n<" + valor + "> \"]";
             } else {
