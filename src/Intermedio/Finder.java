@@ -8,12 +8,12 @@ package Intermedio;
 import Sintactico.Nodo;
 import java.util.Stack;
 
-public class Buscador {
+public class Finder {
 
     private Nodo raiz;
     private Stack<Object> pila;
 
-    public Buscador() {
+    public Finder() {
         this.pila = new Stack<>();
     }
     //producciones de asignacion de valores

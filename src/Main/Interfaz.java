@@ -1,7 +1,9 @@
 package Main;
 
+import Intermedio.Identifier;
 import Intermedio.CodigoIntermedio;
 import Intermedio.ModalCuadruplos;
+import Intermedio.ModalIdentifiers;
 import Lexico.AnalizadorLexico;
 import Lexico.PaintTextBox;
 import Semantico.AnalizadorSemantico;
@@ -635,10 +637,17 @@ public class Interfaz extends javax.swing.JFrame {
         
         if (this.arbolSintactico != null) {
             CodigoIntermedio ci = new CodigoIntermedio();
-            System.out.println("HOLA");
             ci.recorrerArbolSintactico(this.arbolSintactico);
             ci.imprimirCodigo();
             ModalCuadruplos vCodigo = new ModalCuadruplos(ci.getCodigo());
+            
+            Identifier[] identifiers = ci.getIdentifiers();
+            for(Identifier ident : identifiers) {
+                System.out.println(ident);
+            }
+            ModalIdentifiers vIdentifiers = new ModalIdentifiers(identifiers);
+            
+            vIdentifiers.show();
             vCodigo.show();
         }
     }//GEN-LAST:event_btnGeneradorCodigoIntermedioActionPerformed

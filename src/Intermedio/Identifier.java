@@ -1,17 +1,29 @@
-package Main;
+package Intermedio;
 
 public class Identifier {
     private final String type;
     private final String name;
-    private final String value;
-    private final int size;
-    private final int pos;
+    private String value;
+    private int size;
+    private int pos;
 
     public Identifier(String type, String name, String value, int size, int pos) {
         this.type = type;
         this.name = name;
         this.value = value;
         this.size = size;
+        this.pos = pos;
+    }
+    
+    public void setValue(String value) {
+        this.value = value;
+    }
+    
+    public void setSize(int size) {
+        this.size = size;
+    }
+    
+    public void setPos(int pos) {
         this.pos = pos;
     }
 

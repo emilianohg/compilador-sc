@@ -4,10 +4,14 @@ import Sintactico.Nodo;
 import java.util.ArrayList;
 import java.util.Stack;
 import Posfija.Posfija;
+import java.util.Optional;
 
 public class CodigoIntermedio {
 
     private ArrayList<Cuadruplo> pila;
+    private ArrayList<Identifier> identifiers;
+    private int memoryStack;
+
     private int gvtemporal;
     private Nodo condicion_alta;
     private String nodoAnterior;
@@ -18,6 +22,7 @@ public class CodigoIntermedio {
 
     public CodigoIntermedio() {
         this.pila = new ArrayList<>();
+        this.identifiers = new ArrayList<>();
         this.gvtemporal = -1;
         this.getemporal = -1;
         this.condicion_alta = new Nodo("", "", 0);
@@ -36,39 +41,86 @@ public class CodigoIntermedio {
         return "NULL";
     }
     
+    private Identifier getIdentifier(String valor, String name) {
+                
+        if (valor.equals("true") || valor.equals("false")) {
+            this.memoryStack += 1;
+            return new Identifier("boolean", name, valor, 1, this.memoryStack - 1);
+        }
+        
+        try { 
+            Integer.parseInt(valor);
+            this.memoryStack += 2;
+            return new Identifier("int", name, valor, 2, this.memoryStack - 2);
+        } catch(NumberFormatException e) {}
+        
+        try { 
+            Double.parseDouble(valor);
+            this.memoryStack += 4;
+            return new Identifier("double", name, valor, 4, this.memoryStack - 4);
+        } catch(NumberFormatException e) {}
+        
+        this.memoryStack += valor.length();
+        
+        return new Identifier("string", name, valor, valor.length(), this.memoryStack - valor.length());
+    }
+    
+    private void saveIdentifier(String var, String valor) {
+        Optional<Identifier> optIdent = this.identifiers.stream()
+            .filter(p -> p.getName().equals(var))
+            .findFirst();
+
+        if (optIdent.isPresent()) {
+            Identifier updated = this.getIdentifier(valor, var);
+            Identifier ident = optIdent.get();
+            ident.setValue(updated.getValue());
+            ident.setSize(updated.getSize());
+            ident.setPos(updated.getPos());
+        } else {
+            this.identifiers.add(
+                this.getIdentifier(valor, var)
+            );
+        }
+    }
+    
 
     public void recorrerArbolSintactico(Nodo arbol) {
-        Buscador buscador = new Buscador();
+        Finder finder = new Finder();
         System.out.println(arbol.getNombreRaiz());
 
         switch (arbol.getNombreRaiz()) {
             
             case "ASIGNACION":
-                Nodo listaVar = buscador.rastrearNodo(arbol, "LISTA_VARIABLES");
-                buscador.cargarPilaConHojaEspecifica(listaVar, "IDENTIFIER");
-                Stack<Object> variables = buscador.getPila();
+                Nodo listaVar = finder.rastrearNodo(arbol, "LISTA_VARIABLES");
+                finder.cargarPilaConHojaEspecifica(listaVar, "IDENTIFIER");
+                Stack<Object> variables = finder.getPila();
 
-                buscador = new Buscador();
-                Nodo exp_asig_basica = buscador.rastrearNodo(arbol, "EXP_ASIG_BASICA");
+                finder = new Finder();
+                Nodo exp_asig_basica = finder.rastrearNodo(arbol, "EXP_ASIG_BASICA");
                 if (exp_asig_basica.getNombreRaiz().equals("")) {
-                    Nodo tipo_valor = buscador.rastrearNodo(arbol, "TIPO_VALOR");
-                    buscador.cargarPilaConHojas(tipo_valor);
+                    Nodo tipo_valor = finder.rastrearNodo(arbol, "TIPO_VALOR");
+                    finder.cargarPilaConHojas(tipo_valor);
                 } else {
-                    buscador.cargarPilaConHojas(exp_asig_basica);
+                    finder.cargarPilaConHojas(exp_asig_basica);
                 }
 
-                String exp = buscador.getPilaString();
+                String exp = finder.getPilaString();
                 
                 Posfija pos = new Posfija();
                 ArrayList<Object> expCov = pos.posfija(exp);
                 
                 if (expCov.size() == 1) {
+                    
                     String var1 = ((Nodo) variables.pop()).getValor();
+                    String valor = expCov.get(0).toString();
+                    
+                    this.saveIdentifier(var1, valor);
+                    
                     this.pila.add(
                         new Cuadruplo(
                             "MOV",
                             var1,
-                            expCov.get(0).toString(),
+                            valor,
                             "NULL"
                         )
                     );
@@ -97,11 +149,14 @@ public class CodigoIntermedio {
                         }
                     }
                     for (int i = 0; i < variables.size(); i++) {
+                        String var1 = "t" + this.gvtemporal;
+                        String valor = ((Nodo) variables.get(i)).getValor();
+                        this.saveIdentifier(var1, "0.0");
                         this.pila.add(
                             new Cuadruplo(
                                 "MOV",
-                                ((Nodo) variables.get(i)).getValor(),
                                 "t" + this.gvtemporal,
+                                valor,
                                 "NULL"
                             )
                         );
@@ -115,13 +170,13 @@ public class CodigoIntermedio {
 
             case "CONDICION_BAJA":
                 Nodo condicion_baja = arbol;
-                buscador.cargarPilaConHojas(condicion_baja);
-                Stack<Object> parametros = buscador.getPila();
+                finder.cargarPilaConHojas(condicion_baja);
+                Stack<Object> parametros = finder.getPila();
                 this.gvtemporal++;
                 String operando2 = ((Nodo) parametros.pop()).getValor();
                 String operador = simOperRel(((Nodo) parametros.pop()).getValor());
                 String operando1 = ((Nodo) parametros.pop()).getValor();
-                
+                                
                 this.pila.add(
                     new Cuadruplo(
                         "MIN",
@@ -192,9 +247,9 @@ public class CodigoIntermedio {
                 );
                 break;
             case "LISTA_IMPRECIONES":
-                buscador.cargarPilaConHojas(arbol);
-                for (int i = 0; i < buscador.getPila().size(); i++) {
-                    Nodo objTexto = (Nodo) buscador.getPila().get(i);
+                finder.cargarPilaConHojas(arbol);
+                for (int i = 0; i < finder.getPila().size(); i++) {
+                    Nodo objTexto = (Nodo) finder.getPila().get(i);
                     if (!objTexto.getNombreRaiz().equals("OPER_AGRUP_COMA")) {
                         this.pila.add(
                             new Cuadruplo(
@@ -206,7 +261,7 @@ public class CodigoIntermedio {
                         );
                     }
                 }
-                buscador.getPila().clear();
+                finder.getPila().clear();
                 return;
         }
         
@@ -272,12 +327,23 @@ public class CodigoIntermedio {
     }
 
     public Cuadruplo[] getCodigo() {
-        return this.pila.toArray(new Cuadruplo[this.pila.size()]);
         /*
-        for (Cuadruplo cuadruplo: this.pila) {
-            aux += linea.toString() + "\n";
-        }
-        return aux;
+        this.identifiers.forEach((ident)-> {
+            this.pila.add(
+                0,
+                new Cuadruplo(
+                   "DECLARE",
+                   ""+ident.getSize(),
+                   ""+ident.getValue(),
+                   ident.getName()
+                )
+            );
+        });
         */
+        return this.pila.toArray(new Cuadruplo[this.pila.size()]);
+    }
+    
+    public Identifier[] getIdentifiers() {
+        return this.identifiers.toArray(new Identifier[this.identifiers.size()]);
     }
 }
