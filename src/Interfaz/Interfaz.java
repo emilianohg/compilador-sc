@@ -57,17 +57,18 @@ public class Interfaz extends javax.swing.JFrame {
     int conLinea = 1;
     int linea = 0;
     Nodo arbolSintactico;
+    enum TypeConsoleMessage {
+        ERROR, INFO
+    };
 
     public Interfaz() {
         initComponents();
         this.setLocationRelativeTo(null);
-        PnlToken.setVisible(false);
+        PnlToken.setVisible(true);
+        splitPaneEC.setDividerLocation(0.70);
         txtCode.requestFocus();
-        btnArbolSintaxis.setVisible(false);
+        btnAnalizadorLexico.setVisible(true);
         //consola.setVisible(false);
-
-        splitPaneCentral.getBottomComponent().setVisible(false);
-        splitPaneEC.getRightComponent().setVisible(false);
 
         SimpleAttributeSet attribs = new SimpleAttributeSet();
         StyleConstants.setAlignment(attribs, StyleConstants.ALIGN_RIGHT);
@@ -76,7 +77,19 @@ public class Interfaz extends javax.swing.JFrame {
         txtNumLinea.setParagraphAttributes(attribs, true);
 
         ThreadNumberCode nC = new ThreadNumberCode();
+        abrirArchivoCodigo("estructura_if.txt", txtCode);
         nC.start();
+    }
+    
+    private void writeMessageInConsole(String text, TypeConsoleMessage type) {
+        Pintar mensaje = new Pintar();
+        mensaje.insertarCodigo(text);
+        if (type == TypeConsoleMessage.ERROR) {
+            mensaje.pintaRojoFuerte(0, mensaje.getTexto().length());
+        } else {
+            mensaje.pintaAzulBold(0, mensaje.getTexto().length());
+        }
+        txtErrores.setDocument(mensaje.componente.getDocument());
     }
 
     /**
@@ -99,35 +112,17 @@ public class Interfaz extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         TblAnalisis = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
         consola = new javax.swing.JPanel();
         PanelControlesSintactico = new javax.swing.JPanel();
-        btnArbolSintaxis = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btnAnalizadorLexico = new javax.swing.JButton();
+        btnAnalizadorSintactico = new javax.swing.JButton();
+        btnAnalizadorSemantico = new javax.swing.JButton();
+        btnGeneradorCodigoIntermedio = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         txtErrores = new javax.swing.JTextPane();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
-        jMenuItem13 = new javax.swing.JMenuItem();
-        jMenu5 = new javax.swing.JMenu();
-        jMenuItem16 = new javax.swing.JMenuItem();
-        jMenu3 = new javax.swing.JMenu();
-        jMenuItem15 = new javax.swing.JMenuItem();
-        jMenuItem9 = new javax.swing.JMenuItem();
-        jMenuItem10 = new javax.swing.JMenuItem();
-        jMenuItem4 = new javax.swing.JMenuItem();
-        jMenuItem6 = new javax.swing.JMenuItem();
-        jMenuItem5 = new javax.swing.JMenuItem();
-        jMenuItem17 = new javax.swing.JMenuItem();
-        jMenuItem7 = new javax.swing.JMenuItem();
-        jMenuItem8 = new javax.swing.JMenuItem();
-        jMenu4 = new javax.swing.JMenu();
-        jMenuItem11 = new javax.swing.JMenuItem();
-        jMenuItem12 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("KidCode");
@@ -138,8 +133,8 @@ public class Interfaz extends javax.swing.JFrame {
                 formPropertyChange(evt);
             }
         });
+        getContentPane().setLayout(new java.awt.BorderLayout());
 
-        splitPaneCentral.setBorder(null);
         splitPaneCentral.setDividerSize(2);
         splitPaneCentral.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
 
@@ -155,7 +150,6 @@ public class Interfaz extends javax.swing.JFrame {
 
         jPanel2.setLayout(new java.awt.BorderLayout());
 
-        txtCode.setBackground(new java.awt.Color(255, 255, 255));
         txtCode.setFont(new java.awt.Font("Consolas", 1, 14)); // NOI18N
         txtCode.setSelectionColor(new java.awt.Color(0, 51, 255));
         txtCode.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -168,7 +162,6 @@ public class Interfaz extends javax.swing.JFrame {
         txtNumLinea.setEditable(false);
         txtNumLinea.setBackground(new java.awt.Color(0, 0, 51));
         txtNumLinea.setFont(new java.awt.Font("Consolas", 3, 14)); // NOI18N
-        txtNumLinea.setForeground(new java.awt.Color(0, 0, 0));
         txtNumLinea.setText("1");
         txtNumLinea.setMinimumSize(new java.awt.Dimension(14, 25));
         txtNumLinea.setPreferredSize(new java.awt.Dimension(30, 50));
@@ -215,20 +208,6 @@ public class Interfaz extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(247, 247, 247));
         jPanel1.setPreferredSize(new java.awt.Dimension(20, 100));
         jPanel1.setLayout(new java.awt.GridLayout(20, 0, 0, 2));
-
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/cerrrar.png"))); // NOI18N
-        jButton1.setBorder(null);
-        jButton1.setBorderPainted(false);
-        jButton1.setContentAreaFilled(false);
-        jButton1.setFocusPainted(false);
-        jButton1.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/img/cerrar1.png"))); // NOI18N
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jButton1);
-
         PnlToken.add(jPanel1, java.awt.BorderLayout.LINE_START);
 
         splitPaneEC.setRightComponent(PnlToken);
@@ -242,20 +221,31 @@ public class Interfaz extends javax.swing.JFrame {
 
         PanelControlesSintactico.setMinimumSize(new java.awt.Dimension(0, 24));
 
-        btnArbolSintaxis.setText("ver arbol de sintaxis");
-        btnArbolSintaxis.addActionListener(new java.awt.event.ActionListener() {
+        btnAnalizadorLexico.setText("Analizador léxico");
+        btnAnalizadorLexico.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnArbolSintaxisActionPerformed(evt);
+                btnAnalizadorLexicoActionPerformed(evt);
             }
         });
 
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/cerrrar.png"))); // NOI18N
-        jButton2.setBorderPainted(false);
-        jButton2.setContentAreaFilled(false);
-        jButton2.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/img/cerrar1.png"))); // NOI18N
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnAnalizadorSintactico.setText("Analizador sintactico");
+        btnAnalizadorSintactico.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnAnalizadorSintacticoActionPerformed(evt);
+            }
+        });
+
+        btnAnalizadorSemantico.setText("Analizador semantico");
+        btnAnalizadorSemantico.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAnalizadorSemanticoActionPerformed(evt);
+            }
+        });
+
+        btnGeneradorCodigoIntermedio.setText("Generar código intermedio");
+        btnGeneradorCodigoIntermedio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGeneradorCodigoIntermedioActionPerformed(evt);
             }
         });
 
@@ -264,18 +254,26 @@ public class Interfaz extends javax.swing.JFrame {
         PanelControlesSintacticoLayout.setHorizontalGroup(
             PanelControlesSintacticoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelControlesSintacticoLayout.createSequentialGroup()
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap()
+                .addComponent(btnAnalizadorLexico)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnArbolSintaxis)
-                .addGap(0, 555, Short.MAX_VALUE))
+                .addComponent(btnAnalizadorSintactico)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnAnalizadorSemantico)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnGeneradorCodigoIntermedio)
+                .addContainerGap(111, Short.MAX_VALUE))
         );
         PanelControlesSintacticoLayout.setVerticalGroup(
             PanelControlesSintacticoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelControlesSintacticoLayout.createSequentialGroup()
-                .addGroup(PanelControlesSintacticoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnArbolSintaxis, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(0, 0, 0))
+                .addContainerGap()
+                .addGroup(PanelControlesSintacticoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAnalizadorSintactico)
+                    .addComponent(btnAnalizadorLexico)
+                    .addComponent(btnAnalizadorSemantico)
+                    .addComponent(btnGeneradorCodigoIntermedio))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
 
         consola.add(PanelControlesSintactico, java.awt.BorderLayout.PAGE_START);
@@ -307,142 +305,6 @@ public class Interfaz extends javax.swing.JFrame {
         jMenu1.add(jMenuItem1);
 
         jMenuBar1.add(jMenu1);
-
-        jMenu2.setText("Ejecutar");
-
-        jMenuItem2.setText("Análisis Lexico");
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem2ActionPerformed(evt);
-            }
-        });
-        jMenu2.add(jMenuItem2);
-
-        jMenuItem3.setText("Análisis Sintáctico");
-        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem3ActionPerformed(evt);
-            }
-        });
-        jMenu2.add(jMenuItem3);
-
-        jMenuItem13.setText("Análisis Semantico");
-        jMenuItem13.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem13ActionPerformed(evt);
-            }
-        });
-        jMenu2.add(jMenuItem13);
-
-        jMenuBar1.add(jMenu2);
-
-        jMenu5.setText("Generar");
-
-        jMenuItem16.setText("Codigo intermedio");
-        jMenuItem16.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem16ActionPerformed(evt);
-            }
-        });
-        jMenu5.add(jMenuItem16);
-
-        jMenuBar1.add(jMenu5);
-
-        jMenu3.setText("Ejemplos");
-
-        jMenuItem15.setText("Estructura básica");
-        jMenuItem15.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem15ActionPerformed(evt);
-            }
-        });
-        jMenu3.add(jMenuItem15);
-
-        jMenuItem9.setText("Leer");
-        jMenuItem9.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem9ActionPerformed(evt);
-            }
-        });
-        jMenu3.add(jMenuItem9);
-
-        jMenuItem10.setText("Imprimir");
-        jMenuItem10.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem10ActionPerformed(evt);
-            }
-        });
-        jMenu3.add(jMenuItem10);
-
-        jMenuItem4.setText("Declaración de variables");
-        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem4ActionPerformed(evt);
-            }
-        });
-        jMenu3.add(jMenuItem4);
-
-        jMenuItem6.setText("Declara y Asignar");
-        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem6ActionPerformed(evt);
-            }
-        });
-        jMenu3.add(jMenuItem6);
-
-        jMenuItem5.setText("Condiciones");
-        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem5ActionPerformed(evt);
-            }
-        });
-        jMenu3.add(jMenuItem5);
-
-        jMenuItem17.setText("Estructura Si");
-        jMenuItem17.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem17ActionPerformed(evt);
-            }
-        });
-        jMenu3.add(jMenuItem17);
-
-        jMenuItem7.setText("Ciclo mientras");
-        jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem7ActionPerformed(evt);
-            }
-        });
-        jMenu3.add(jMenuItem7);
-
-        jMenuItem8.setText("Ciclo repetir");
-        jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem8ActionPerformed(evt);
-            }
-        });
-        jMenu3.add(jMenuItem8);
-
-        jMenuBar1.add(jMenu3);
-
-        jMenu4.setText("Herramientas");
-
-        jMenuItem11.setText("Consola");
-        jMenuItem11.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem11ActionPerformed(evt);
-            }
-        });
-        jMenu4.add(jMenuItem11);
-
-        jMenuItem12.setText("Tabla de Tokens");
-        jMenuItem12.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem12ActionPerformed(evt);
-            }
-        });
-        jMenu4.add(jMenuItem12);
-
-        jMenuBar1.add(jMenu4);
 
         setJMenuBar(jMenuBar1);
 
@@ -497,133 +359,12 @@ public class Interfaz extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-
-        DefaultTableModel modelo = (DefaultTableModel) TblAnalisis.getModel();
-        modelo.setRowCount(0);
-        try {
-            String codigo = txtCode.getText();
-            String tok = "";
-            int lin = 0;
-            String lex = "";
-            Reader reader = new BufferedReader(new BufferedReader(new StringReader(codigo)));
-            AnalizadorLexico lexico = new AnalizadorLexico(reader);
-            lexico.estilo.insertarCodigoPane(txtCode);
-            while (true) {
-                lexico.next_token();
-                if (lexico.yytext().equals("")) {
-                    break;
-                }
-                lin = lexico.numLinea() + 1;
-                tok = lexico.nameToken;
-                lex = lexico.yytext();
-
-                Object[] row1 = {lin, tok, lex};
-                modelo.addRow(row1);
-
-            }
-            txtCode = lexico.estilo.componente;
-
-        } catch (IOException ex) {
-            Logger.getLogger(Interfaz.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        TblAnalisis.setModel(modelo);
-        PnlToken.setVisible(true);
-        splitPaneEC.setDividerLocation(0.70);
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        PnlToken.setVisible(false);
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-        //txtErrores.setText("---------------Consola---------------");
-        /*
-        consola.setVisible(true);
-        splitPaneCentral.removeAll();
-        splitPaneCentral.setTopComponent(panelEditor);
-        splitPaneCentral.setBottomComponent(consola);
-        splitPaneCentral.setDividerLocation(0.5);
-         */
-        splitPaneCentral.getBottomComponent().setVisible(true);
-        splitPaneCentral.setDividerLocation(0.60);
-
-        txtErrores.setText("");
-        String codigo = txtCode.getText();
-        Reader reader = new BufferedReader(new BufferedReader(new StringReader(codigo)));
-        AnalizadorLexico lexico;
-        AnalizadorSintactico sintactico;
-
-        if (errorLexico() == true) {
-            JOptionPane.showMessageDialog(null, "Se detectaron errores lexicos. No se puede continuar");
-        } else {
-            lexico = new AnalizadorLexico(reader);
-            lexico.estilo.insertarCodigoPane(txtCode);
-            sintactico = new AnalizadorSintactico(lexico);
-
-            try {
-
-                sintactico.parse();
-                arbolSintactico = sintactico.nodoPrincipal;
-                generarArbolSintaxis(sintactico);
-                btnArbolSintaxis.setVisible(true);
-                JOptionPane.showMessageDialog(null, "Analisis sintáctico finalizado correctamente");
-
-                Pintar mensaje = new Pintar();
-                mensaje.insertarCodigo("----------------Analisis sintáctico finalizado correctamente----------------");
-                mensaje.pintaAzulBold(0, mensaje.getTexto().length());
-                txtErrores.setDocument(mensaje.componente.getDocument());
-
-            } catch (Exception ex) {
-                if (sintactico.charErrorDetec() != -1 && sintactico.charErrorDetec() != 0) {
-                    int diezPorciento = (int) (codigo.substring(0, sintactico.charErrorDetec()).length() * 0.10);
-                    System.out.println("10% = " + diezPorciento);
-                    int tamTextoFinal = sintactico.estilo.getTexto().length();
-                    String textoCargado = "";
-                    try {
-                        textoCargado = sintactico.estilo.doc.getText(0, tamTextoFinal);
-                    } catch (BadLocationException ex1) {
-                        Logger.getLogger(Interfaz.class.getName()).log(Level.SEVERE, null, ex1);
-                    }
-                    String errores = "Error en codigo:\n\t..." + codigo.substring(diezPorciento, sintactico.charErrorDetec());
-                    try {
-                        sintactico.estilo.doc.insertString(tamTextoFinal, errores, null);
-                    } catch (BadLocationException ex1) {
-                        Logger.getLogger(Interfaz.class.getName()).log(Level.SEVERE, null, ex1);
-                    }
-                    sintactico.estilo.pintaAzul(tamTextoFinal, (sintactico.estilo.getTexto() + errores).length());
-                    txtErrores.setDocument(sintactico.estilo.componente.getDocument());
-                }
-                JOptionPane.showMessageDialog(null, "Error sintactico");
-
-                Logger.getLogger(Interfaz.class.getName()).log(Level.SEVERE, null, ex);
-            }
-
-        }
-
-
-    }//GEN-LAST:event_jMenuItem3ActionPerformed
-
     private void generarArbolSintaxis(AnalizadorSintactico analisis) {
         Nodo raiz = analisis.nodoPrincipal;
         String datos = mapearArbolIni(raiz);
         String datos1 = mapearUnionesArbolIni(raiz);
         Graficar(datos + "\n" + datos1, "Arbol");
-        abrirDiagrama();
 
-    }
-
-    private void abrirDiagrama() {
-        try {
-            String url = Paths.get(".").toAbsolutePath().normalize().toString();
-            String path = url + "\\src\\img\\Arbol.png";
-            System.out.println("path: " + path);
-            ProcessBuilder p = new ProcessBuilder();
-            p.command("cmd.exe", "/c", path);
-            p.start();
-        } catch (IOException ex) {
-            Logger.getLogger(Interfaz.class.getName()).log(Level.SEVERE, null, ex);
-        }
     }
 
     //inicializa los nodos para poder unir sin dupliciadad
@@ -734,59 +475,121 @@ public class Interfaz extends javax.swing.JFrame {
     }
 
 
-    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
-        abrirArchivoCodigo("dec_var.txt", txtCode);
-    }//GEN-LAST:event_jMenuItem4ActionPerformed
-
-    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
-        abrirArchivoCodigo("condi.txt", txtCode);
-    }//GEN-LAST:event_jMenuItem5ActionPerformed
-
-    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
-        abrirArchivoCodigo("dec_asig_var.txt", txtCode);
-    }//GEN-LAST:event_jMenuItem6ActionPerformed
-
-    private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
-        abrirArchivoCodigo("ciclo_mientras.txt", txtCode);
-    }//GEN-LAST:event_jMenuItem7ActionPerformed
-
-    private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
-        abrirArchivoCodigo("ciclo_repetir.txt", txtCode);
-    }//GEN-LAST:event_jMenuItem8ActionPerformed
-
-    private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
-        abrirArchivoCodigo("leer.txt", txtCode);
-    }//GEN-LAST:event_jMenuItem9ActionPerformed
-
-    private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed
-        abrirArchivoCodigo("imprimir.txt", txtCode);
-    }//GEN-LAST:event_jMenuItem10ActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        consola.setVisible(false);
-    }//GEN-LAST:event_jButton2ActionPerformed
-
-    private void jMenuItem11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem11ActionPerformed
-
-        splitPaneCentral.getBottomComponent().setVisible(true);
-        splitPaneCentral.setDividerLocation(0.80);
-    }//GEN-LAST:event_jMenuItem11ActionPerformed
-
-    private void jMenuItem12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem12ActionPerformed
-
-        splitPaneEC.getRightComponent().setVisible(true);
-        splitPaneEC.setDividerLocation(0.70);
-    }//GEN-LAST:event_jMenuItem12ActionPerformed
-
     private void formPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_formPropertyChange
 
     }//GEN-LAST:event_formPropertyChange
 
-    private void jMenuItem13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem13ActionPerformed
+    private void btnAnalizadorLexicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnalizadorLexicoActionPerformed
+        DefaultTableModel modelo = (DefaultTableModel) TblAnalisis.getModel();
+        modelo.setRowCount(0);
+        try {
+            String codigo = txtCode.getText();
+            String tok = "";
+            int lin = 0;
+            String lex = "";
+            Reader reader = new BufferedReader(new BufferedReader(new StringReader(codigo)));
+            AnalizadorLexico lexico = new AnalizadorLexico(reader);
+            lexico.estilo.insertarCodigoPane(txtCode);
+            while (true) {
+                lexico.next_token();
+                if (lexico.yytext().equals("")) {
+                    break;
+                }
+                lin = lexico.numLinea() + 1;
+                tok = lexico.nameToken;
+                lex = lexico.yytext();
+
+                Object[] row1 = {lin, tok, lex};
+                modelo.addRow(row1);
+
+            }
+            txtCode = lexico.estilo.componente;
+
+        } catch (IOException ex) {
+            Logger.getLogger(Interfaz.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        TblAnalisis.setModel(modelo);
+        PnlToken.setVisible(true);
+        splitPaneEC.setDividerLocation(0.70);
+    }//GEN-LAST:event_btnAnalizadorLexicoActionPerformed
+
+    private void txtCodeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodeKeyTyped
+
+    }//GEN-LAST:event_txtCodeKeyTyped
+
+    private void btnAnalizadorSintacticoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnalizadorSintacticoActionPerformed
+        
+        splitPaneCentral.getBottomComponent().setVisible(true);
+        splitPaneCentral.setDividerLocation(0.60);
+
+        txtErrores.setText("");
+        String codigo = txtCode.getText();
+        Reader reader = new BufferedReader(new BufferedReader(new StringReader(codigo)));
+        AnalizadorLexico lexico;
+        AnalizadorSintactico sintactico;
+        
+
+        if (errorLexico()) {
+            
+            this.writeMessageInConsole(
+                "Se detectaron errores lexicos. No se puede continuar",
+                TypeConsoleMessage.ERROR
+            );
+            
+        } else {
+            lexico = new AnalizadorLexico(reader);
+            lexico.estilo.insertarCodigoPane(txtCode);
+            sintactico = new AnalizadorSintactico(lexico);
+
+            try {
+
+                sintactico.parse();
+                arbolSintactico = sintactico.nodoPrincipal;
+                generarArbolSintaxis(sintactico);
+                
+                this.writeMessageInConsole(
+                    "Analisis sintáctico finalizado con exito",
+                    TypeConsoleMessage.INFO
+                );
+
+            } catch (Exception ex) {
+                if (sintactico.charErrorDetec() != -1 && sintactico.charErrorDetec() != 0) {
+                    int diezPorciento = (int) (codigo.substring(0, sintactico.charErrorDetec()).length() * 0.10);
+                    System.out.println("10% = " + diezPorciento);
+                    int tamTextoFinal = sintactico.estilo.getTexto().length();
+                    String textoCargado = "";
+                    try {
+                        textoCargado = sintactico.estilo.doc.getText(0, tamTextoFinal);
+                    } catch (BadLocationException ex1) {
+                        Logger.getLogger(Interfaz.class.getName()).log(Level.SEVERE, null, ex1);
+                    }
+                    String errores = "Error en codigo:\n\t..." + codigo.substring(diezPorciento, sintactico.charErrorDetec());
+                    try {
+                        sintactico.estilo.doc.insertString(tamTextoFinal, errores, null);
+                    } catch (BadLocationException ex1) {
+                        Logger.getLogger(Interfaz.class.getName()).log(Level.SEVERE, null, ex1);
+                    }
+                    sintactico.estilo.pintaAzul(tamTextoFinal, (sintactico.estilo.getTexto() + errores).length());
+                    txtErrores.setDocument(sintactico.estilo.componente.getDocument());
+                }
+                
+                this.writeMessageInConsole(
+                    "Error sintactico",
+                    TypeConsoleMessage.ERROR
+                );
+                
+                Logger.getLogger(Interfaz.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        }
+
+    }//GEN-LAST:event_btnAnalizadorSintacticoActionPerformed
+
+    private void btnAnalizadorSemanticoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnalizadorSemanticoActionPerformed
         txtErrores.setText("");
         AnalizadorSintactico sintactico_a = null;
-        if (errorLexico() == true) {
-            JOptionPane.showMessageDialog(null, "Se detectaron errores lexicos. No se puede continuar");
+        if (errorLexico()) {
+            this.writeMessageInConsole("Se detectaron errores lexicos. No se puede continuar", TypeConsoleMessage.ERROR);
         } else {
             String codigo = txtCode.getText();
             Reader reader_a = new BufferedReader(new BufferedReader(new StringReader(codigo)));
@@ -797,7 +600,10 @@ public class Interfaz extends javax.swing.JFrame {
             try {
                 sintactico_a.parse();
             } catch (Exception ex) {
-                JOptionPane.showMessageDialog(null, "Se detectaron errores sintácticos. No se puede continuar");
+                this.writeMessageInConsole(
+                    "Se detectaron errores sintácticos. No se puede continuar",
+                    TypeConsoleMessage.ERROR
+                );
                 Logger.getLogger(Interfaz.class.getName()).log(Level.SEVERE, null, ex);
             }
             AnalizadorSemantico semantico = new AnalizadorSemantico();
@@ -817,54 +623,36 @@ public class Interfaz extends javax.swing.JFrame {
             semantico.rastrearProduccion("CONDICION_MEDIA", sintactico_a.nodoPrincipal, "NOMBRE_VAR");
             semantico.rastrearProduccion("CONDICION_ALTA", sintactico_a.nodoPrincipal, "NOMBRE_VAR");
 
-            if (semantico.listaErrores.isEmpty() == false) {
+            if (!semantico.listaErrores.isEmpty()) {
                 splitPaneCentral.getBottomComponent().setVisible(true);
                 splitPaneCentral.setDividerLocation(0.60);
-                Pintar mensaje = new Pintar();
                 String errores = "";
                 for (int i = 0; i < semantico.listaErrores.size(); i++) {
                     errores = semantico.listaErrores.get(i) + "\n";
                 }
-                mensaje.insertarCodigo(errores);
-                mensaje.pintaRojoFuerte(0, mensaje.getTexto().length());
-                txtErrores.setDocument(mensaje.componente.getDocument());
+                this.writeMessageInConsole(errores, TypeConsoleMessage.ERROR);
             } else {
-                JOptionPane.showMessageDialog(null, "Análisis semántico finalizado correctamente");
+                this.writeMessageInConsole("Análisis semántico finalizado correctamente", TypeConsoleMessage.INFO);
             }
 
         }
-    }//GEN-LAST:event_jMenuItem13ActionPerformed
+    }//GEN-LAST:event_btnAnalizadorSemanticoActionPerformed
 
-    private void btnArbolSintaxisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnArbolSintaxisActionPerformed
-        abrirDiagrama();
-    }//GEN-LAST:event_btnArbolSintaxisActionPerformed
-
-    private void txtCodeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodeKeyTyped
-
-    }//GEN-LAST:event_txtCodeKeyTyped
-
-    private void jMenuItem15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem15ActionPerformed
-        abrirArchivoCodigo("estructura_basica.txt", txtCode);
-    }//GEN-LAST:event_jMenuItem15ActionPerformed
-
-    private void jMenuItem16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem16ActionPerformed
-//        Buscador prod = new Buscador();
-//        prod.buscarProduccion(arbolSintactico, "EXP_ASIG_BASICA");
-//        prod.buscarProduccion(arbolSintactico, "DECLARACION");
+    private void btnGeneradorCodigoIntermedioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGeneradorCodigoIntermedioActionPerformed
+        
+        if (this.arbolSintactico == null) {
+            this.writeMessageInConsole("Ejecuta el analizador sintactico primero", TypeConsoleMessage.ERROR);
+            return;
+        }
+        
         if (this.arbolSintactico != null) {
             CodigoIntermedio ci = new CodigoIntermedio();
             ci.recorrerArbolSintactico(this.arbolSintactico);
             ci.imprimirCodigo();
             vizCodigo vCodigo = new vizCodigo(ci.getCodigo());
             vCodigo.show();
-        }else{
-            JOptionPane.showMessageDialog(null, "El código debe ser evaluado antes de iniciar\neste proceso.");
         }
-    }//GEN-LAST:event_jMenuItem16ActionPerformed
-
-    private void jMenuItem17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem17ActionPerformed
-        abrirArchivoCodigo("estructura_if.txt", txtCode);
-    }//GEN-LAST:event_jMenuItem17ActionPerformed
+    }//GEN-LAST:event_btnGeneradorCodigoIntermedioActionPerformed
 
 //    private String mapearArbol(Nodo raiz) {
 //        String datos = "";
@@ -1020,32 +808,14 @@ public class Interfaz extends javax.swing.JFrame {
     private javax.swing.JPanel PanelControlesSintactico;
     private javax.swing.JPanel PnlToken;
     private javax.swing.JTable TblAnalisis;
-    private javax.swing.JButton btnArbolSintaxis;
+    private javax.swing.JButton btnAnalizadorLexico;
+    private javax.swing.JButton btnAnalizadorSemantico;
+    private javax.swing.JButton btnAnalizadorSintactico;
+    private javax.swing.JButton btnGeneradorCodigoIntermedio;
     private javax.swing.JPanel consola;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
-    private javax.swing.JMenu jMenu4;
-    private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem10;
-    private javax.swing.JMenuItem jMenuItem11;
-    private javax.swing.JMenuItem jMenuItem12;
-    private javax.swing.JMenuItem jMenuItem13;
-    private javax.swing.JMenuItem jMenuItem15;
-    private javax.swing.JMenuItem jMenuItem16;
-    private javax.swing.JMenuItem jMenuItem17;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
-    private javax.swing.JMenuItem jMenuItem5;
-    private javax.swing.JMenuItem jMenuItem6;
-    private javax.swing.JMenuItem jMenuItem7;
-    private javax.swing.JMenuItem jMenuItem8;
-    private javax.swing.JMenuItem jMenuItem9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;

@@ -33,154 +33,6 @@
             </MenuItem>
           </SubComponents>
         </Menu>
-        <Menu class="javax.swing.JMenu" name="jMenu2">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Ejecutar"/>
-          </Properties>
-          <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem2">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="An&#xe1;lisis Lexico"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem2ActionPerformed"/>
-              </Events>
-            </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem3">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="An&#xe1;lisis Sint&#xe1;ctico"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem3ActionPerformed"/>
-              </Events>
-            </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem13">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="An&#xe1;lisis Semantico"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem13ActionPerformed"/>
-              </Events>
-            </MenuItem>
-          </SubComponents>
-        </Menu>
-        <Menu class="javax.swing.JMenu" name="jMenu5">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Generar"/>
-          </Properties>
-          <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem16">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Codigo intermedio"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem16ActionPerformed"/>
-              </Events>
-            </MenuItem>
-          </SubComponents>
-        </Menu>
-        <Menu class="javax.swing.JMenu" name="jMenu3">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Ejemplos"/>
-          </Properties>
-          <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem15">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Estructura b&#xe1;sica"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem15ActionPerformed"/>
-              </Events>
-            </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem9">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Leer"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem9ActionPerformed"/>
-              </Events>
-            </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem10">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Imprimir"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem10ActionPerformed"/>
-              </Events>
-            </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem4">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Declaraci&#xf3;n de variables"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem4ActionPerformed"/>
-              </Events>
-            </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem6">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Declara y Asignar"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem6ActionPerformed"/>
-              </Events>
-            </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem5">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Condiciones"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem5ActionPerformed"/>
-              </Events>
-            </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem17">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Estructura Si"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem17ActionPerformed"/>
-              </Events>
-            </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem7">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Ciclo mientras"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem7ActionPerformed"/>
-              </Events>
-            </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem8">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Ciclo repetir"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem8ActionPerformed"/>
-              </Events>
-            </MenuItem>
-          </SubComponents>
-        </Menu>
-        <Menu class="javax.swing.JMenu" name="jMenu4">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Herramientas"/>
-          </Properties>
-          <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem11">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Consola"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem11ActionPerformed"/>
-              </Events>
-            </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem12">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Tabla de Tokens"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem12ActionPerformed"/>
-              </Events>
-            </MenuItem>
-          </SubComponents>
-        </Menu>
       </SubComponents>
     </Menu>
   </NonVisualComponents>
@@ -219,9 +71,6 @@
   <SubComponents>
     <Container class="javax.swing.JSplitPane" name="splitPaneCentral">
       <Properties>
-        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-          <Border info="null"/>
-        </Property>
         <Property name="dividerSize" type="int" value="2"/>
         <Property name="orientation" type="int" value="0"/>
       </Properties>
@@ -284,9 +133,6 @@
                       <SubComponents>
                         <Component class="javax.swing.JTextPane" name="txtCode">
                           <Properties>
-                            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                              <Color blue="ff" green="ff" red="ff" type="rgb"/>
-                            </Property>
                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                               <Font name="Consolas" size="14" style="1"/>
                             </Property>
@@ -311,9 +157,6 @@
                             </Property>
                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                               <Font name="Consolas" size="14" style="3"/>
-                            </Property>
-                            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                              <Color blue="0" green="0" red="0" type="rgb"/>
                             </Property>
                             <Property name="text" type="java.lang.String" value="1"/>
                             <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
@@ -429,27 +272,6 @@
                         <Property name="rows" type="int" value="20"/>
                         <Property name="verticalGap" type="int" value="2"/>
                       </Layout>
-                      <SubComponents>
-                        <Component class="javax.swing.JButton" name="jButton1">
-                          <Properties>
-                            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                              <Image iconType="3" name="/img/cerrrar.png"/>
-                            </Property>
-                            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-                              <Border info="null"/>
-                            </Property>
-                            <Property name="borderPainted" type="boolean" value="false"/>
-                            <Property name="contentAreaFilled" type="boolean" value="false"/>
-                            <Property name="focusPainted" type="boolean" value="false"/>
-                            <Property name="pressedIcon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                              <Image iconType="3" name="/img/cerrar1.png"/>
-                            </Property>
-                          </Properties>
-                          <Events>
-                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
-                          </Events>
-                        </Component>
-                      </SubComponents>
                     </Container>
                   </SubComponents>
                 </Container>
@@ -487,47 +309,64 @@
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <Component id="jButton2" min="-2" pref="21" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="btnArbolSintaxis" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="0" pref="555" max="32767" attributes="0"/>
+                          <Component id="btnAnalizadorLexico" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="btnAnalizadorSintactico" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="btnAnalizadorSemantico" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="btnGeneradorCodigoIntermedio" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace pref="111" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="jButton2" max="32767" attributes="0"/>
-                              <Component id="btnArbolSintaxis" max="32767" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="btnAnalizadorSintactico" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="btnAnalizadorLexico" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="btnAnalizadorSemantico" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="btnGeneradorCodigoIntermedio" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
+                          <EmptySpace pref="16" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
               </Layout>
               <SubComponents>
-                <Component class="javax.swing.JButton" name="btnArbolSintaxis">
+                <Component class="javax.swing.JButton" name="btnAnalizadorLexico">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="ver arbol de sintaxis"/>
+                    <Property name="text" type="java.lang.String" value="Analizador l&#xe9;xico"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnArbolSintaxisActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAnalizadorLexicoActionPerformed"/>
                   </Events>
                 </Component>
-                <Component class="javax.swing.JButton" name="jButton2">
+                <Component class="javax.swing.JButton" name="btnAnalizadorSintactico">
                   <Properties>
-                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/img/cerrrar.png"/>
-                    </Property>
-                    <Property name="borderPainted" type="boolean" value="false"/>
-                    <Property name="contentAreaFilled" type="boolean" value="false"/>
-                    <Property name="pressedIcon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/img/cerrar1.png"/>
-                    </Property>
+                    <Property name="text" type="java.lang.String" value="Analizador sintactico"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton2ActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAnalizadorSintacticoActionPerformed"/>
+                  </Events>
+                </Component>
+                <Component class="javax.swing.JButton" name="btnAnalizadorSemantico">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Analizador semantico"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAnalizadorSemanticoActionPerformed"/>
+                  </Events>
+                </Component>
+                <Component class="javax.swing.JButton" name="btnGeneradorCodigoIntermedio">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Generar c&#xf3;digo intermedio"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnGeneradorCodigoIntermedioActionPerformed"/>
                   </Events>
                 </Component>
               </SubComponents>
