@@ -54,8 +54,7 @@ parser code
 :}
 
 
-terminal PAL_INICIO_PROG,
-    PAL_FIN_PROG,
+terminal
     PAL_VARIABLE,
     PAL_GRUPO,
     LEER,
@@ -92,7 +91,7 @@ terminal PAL_INICIO_PROG,
     PUNTOYCOMA,
     ERROR;
 
-non terminal INIT,PROGRAMA,CODIGO;
+non terminal INIT,CODIGO;
 //Declarar y/o Asignar
 non terminal ESTRUCTURAS, DECLARACION,LISTA_VARIABLES, ASIGNACION, EXP_ASIGNACION,INC_DEC,EXP_BASICA;
 
@@ -112,30 +111,13 @@ non terminal DECL_ASIG_CICLO, ASIGNACION_CICLO,ASIG_CICLO;
 
 start with INIT;
 
-INIT ::= PROGRAMA:prog
+INIT ::= CODIGO:prog
     {:
         Nodo n1 = new Nodo("INIT","",parser.guia);
         getGuia();
         n1.addRaiz((Nodo) prog);
         parser.nodoPrincipal = (Nodo) n1;
         RESULT = n1;
-    :};
-
-PROGRAMA ::= PAL_INICIO_PROG:n1 CODIGO:raiz1 PAL_FIN_PROG:n2
-    {:
-        Nodo raiz = new Nodo("PROGRAMA","",parser.guia);
-        getGuia();
-        Nodo nd1 = new Nodo("PAL_INICIO_PROG",n1.toString(),parser.guia);  
-        getGuia();
-        Nodo nd2 = new Nodo("PAL_FIN_PROG",n2.toString(),parser.guia);
-        getGuia();
-        
-        raiz.addRaiz(nd1);
-        raiz.addRaiz((Nodo)raiz1);
-        raiz.addRaiz(nd2);
-        
-        
-        RESULT = raiz;
     :};
 
 CODIGO ::= CODIGO:raiz1 ESTRUCTURAS:raiz2
@@ -890,60 +872,60 @@ OPERADOR_ARITMETICO ::= OPER_ART_SUMA:n1
        System.out.println("<OPERADOR_ARITMETICO><OPER_ART_DIV>"); 
     :};
 
-CONDICIONALES ::= CONDICION_SI:n1 OPER_AGRUP_PI:n2 LISTA_CONDICIONES:raiz1 OPER_AGRUP_PF:n3 CONDICION_INICIO:n4 CODIGO:raiz2 CONDICION_FIN:n5
-    {:
-        Nodo raiz = new Nodo("CONDICIONALES","",parser.guia);        
-        getGuia();  
-        Nodo nd1 = new Nodo("CONDICION_SI",n1.toString(),parser.guia);
-        getGuia();   
-        Nodo nd2 = new Nodo("OPER_AGRUP_PI",n2.toString(),parser.guia);
-        getGuia();   
-        Nodo nd3 = new Nodo("OPER_AGRUP_PF",n3.toString(),parser.guia);
-        getGuia();   
-        Nodo nd4 = new Nodo("CONDICION_INICIO",n4.toString(),parser.guia);
-        getGuia();   
-        Nodo nd5 = new Nodo("CONDICION_FIN",n5.toString(),parser.guia);
-        getGuia();   
-        
-        raiz.addRaiz(nd1);
-        raiz.addRaiz(nd2);
-        raiz.addRaiz((Nodo)raiz1);
-        raiz.addRaiz(nd3);
-        raiz.addRaiz(nd4);
-        raiz.addRaiz((Nodo)raiz2);
-        raiz.addRaiz(nd5);
-        RESULT = raiz;         
-       System.out.println("<CONDICIONALES>CONDICION_SI OPER_AGRUP_PI LISTA_CONDICIONES OPER_AGRUP_PF CONDICION_INICIO CODIGO CONDICION_FIN"); 
-    :}
-    //|CONDICION_SI OPER_AGRUP_PI LISTA_CONDICIONES OPER_AGRUP_PF CONDICION_INICIO CODIGO CONDICION_SINO CODIGO CONDICION_FIN
-    |CONDICION_SI:n1 OPER_AGRUP_PI:n2 LISTA_CONDICIONES:raiz1 OPER_AGRUP_PF:n3 CONDICION_INICIO:n4 CODIGO:raiz2 CONDICION_SINO:n5 CODIGO:raiz3 CONDICION_FIN:n6 
+
+CONDICIONALES ::= 
+    CONDICION_SI:if1
+    OPER_AGRUP_PI:par1
+    LISTA_CONDICIONES:lcond1
+    OPER_AGRUP_PF:par2
+    OPER_AGRUP_LLI:cb1
+    CODIGO:ifcod1
+    OPER_AGRUP_LLF:cb2
+    CONDICION_SINO:else1
+    OPER_AGRUP_LLI:cb3
+    CODIGO:elsecode1
+    OPER_AGRUP_LLF:cb4 
     {:
         Nodo raiz = new Nodo("CONDICIONALES","",parser.guia);        
         getGuia(); 
-        Nodo nd1 = new Nodo("CONDICION_SI",n1.toString(),parser.guia);
-        getGuia();
-        Nodo nd2 = new Nodo("OPER_AGRUP_PI",n2.toString(),parser.guia);
-        getGuia();
-        Nodo nd3 = new Nodo("OPER_AGRUP_PF",n3.toString(),parser.guia);
-        getGuia();
-        Nodo nd4 = new Nodo("CONDICION_INICIO",n4.toString(),parser.guia);
-        getGuia();
-        Nodo nd5 = new Nodo("CONDICION_SINO",n5.toString(),parser.guia);
-        getGuia();
-        Nodo nd6 = new Nodo("CONDICION_FIN",n6.toString(),parser.guia);
+
+        Nodo nif1 = new Nodo("CONDICION_SI",if1.toString(),parser.guia);
         getGuia();
 
-        raiz.addRaiz(nd1);
-        raiz.addRaiz(nd2);
-        raiz.addRaiz((Nodo)raiz1);
-        raiz.addRaiz(nd3);
-        raiz.addRaiz(nd4);
-        raiz.addRaiz((Nodo)raiz2);
-        raiz.addRaiz(nd5);
-        raiz.addRaiz((Nodo)raiz3);
-        raiz.addRaiz(nd6);
+        Nodo npar1 = new Nodo("OPER_AGRUP_PI",par1.toString(),parser.guia);
+        getGuia();
+
+        Nodo npar2 = new Nodo("OPER_AGRUP_PF",par2.toString(),parser.guia);
+        getGuia();
+
+        Nodo ncb1 = new Nodo("OPER_AGRUP_LLI",cb1.toString(),parser.guia);
+        getGuia();
+
+        Nodo ncb4 = new Nodo("OPER_AGRUP_LLF",cb4.toString(),parser.guia);
+        getGuia();
+
+        Nodo nelse1 = new Nodo("CONDICION_SINO",else1.toString(),parser.guia);
+        getGuia();
+
+        Nodo ncb2 = new Nodo("OPER_AGRUP_LLF",cb2.toString(),parser.guia);
+        getGuia();
+
+        Nodo ncb3 = new Nodo("OPER_AGRUP_LLI",cb3.toString(),parser.guia);
+        getGuia();
+
+        raiz.addRaiz(nif1);
+        raiz.addRaiz(npar1);
+        raiz.addRaiz((Nodo)lcond1);
+        raiz.addRaiz(npar2);
+        raiz.addRaiz(ncb1);
+        raiz.addRaiz((Nodo)ifcod1);
+        raiz.addRaiz(ncb2);
+        raiz.addRaiz(nelse1);
+        raiz.addRaiz(ncb3);
+        raiz.addRaiz((Nodo)elsecode1);
+        raiz.addRaiz(ncb4);
         RESULT = raiz;      
-       System.out.println("<CONDICIONALES>CONDICION_SI OPER_AGRUP_PI LISTA_CONDICIONES OPER_AGRUP_PF CONDICION_INICIO CODIGO CONDICION_SINO CODIGO CONDICION_FIN"); 
+       System.out.println("<CONDICIONALES>CONDICION_SI OPER_AGRUP_PI LISTA_CONDICIONES OPER_AGRUP_PF OPER_AGRUP_LLI CODIGO OPER_AGRUP_LLF CONDICION_SINO OPER_AGRUP_LLI CODIGO OPER_AGRUP_LLF"); 
     :};
 
 LISTA_CONDICIONES ::= CONDICION_ALTA:raiz1 

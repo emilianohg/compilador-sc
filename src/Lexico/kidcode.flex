@@ -44,21 +44,6 @@ public String getCodigo(){
 {ESPACIO} {/* ignore */}
 "//".* {/* ignore */}
 
-"INICIO" 
-{
-    nameToken = "PAL_INICIO_PROG";
-    estilo.pintaAzulBold(yychar,yylength());
-    return new Symbol(sym.PAL_INICIO_PROG, yychar, yyline,new String(yytext()));
-}
-
-"FIN" 
-{
-    
-    nameToken = "PAL_FIN_PROG";
-    estilo.pintaAzulBold(yychar,yylength());
-    return new Symbol(sym.PAL_FIN_PROG, yychar, yyline,new String(yytext()));
-}
-
 "var"
 {
     nameToken = "PAL_VARIABLE";
@@ -132,7 +117,7 @@ public String getCodigo(){
    return new Symbol(sym.FIN_MIENTRAS, yychar, yyline,new String(yytext()));   
 }
 
-"Y"|"O"|"diferente"|"igual"|"no"|"mayor"|"menor"|"menorigual"|"mayorigual"|"diferente" 
+"!="|"=="|"!"|">"|"<"|"<="|">="|"!=" 
 {
  
     nameToken = "OPER_REL";
@@ -140,7 +125,7 @@ public String getCodigo(){
     return new Symbol(sym.OPER_REL, yychar, yyline,new String(yytext()));
 }
 
-"si"
+"if"
 {
     nameToken = "CONDICION_SI";
     estilo.pintaRojo(yychar,yylength());
@@ -154,7 +139,7 @@ public String getCodigo(){
     return new Symbol(sym.CONDICION_INICIO, yychar, yyline,new String(yytext()));
 }
 
-"sino"
+"else"
 {
     estilo.pintaRojo(yychar,yylength());
     nameToken = "CONDICION_SINO";
@@ -206,7 +191,7 @@ public String getCodigo(){
     return new Symbol(sym.OPER_ASIG_IGUAL, yychar, yyline,new String(yytext()));
 }
 
-"Verdadero"|"Falso"
+"true"|"false"
 {
     estilo.pintaRojo(yychar,yylength());
     nameToken = "VALOR_LOG";

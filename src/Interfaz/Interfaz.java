@@ -160,11 +160,11 @@ public class Interfaz extends javax.swing.JFrame {
         jPanel2.add(txtCode, java.awt.BorderLayout.CENTER);
 
         txtNumLinea.setEditable(false);
-        txtNumLinea.setBackground(new java.awt.Color(0, 0, 51));
+        txtNumLinea.setBackground(new java.awt.Color(204, 204, 204));
         txtNumLinea.setFont(new java.awt.Font("Consolas", 3, 14)); // NOI18N
         txtNumLinea.setText("1");
-        txtNumLinea.setMinimumSize(new java.awt.Dimension(14, 25));
-        txtNumLinea.setPreferredSize(new java.awt.Dimension(30, 50));
+        txtNumLinea.setMinimumSize(new java.awt.Dimension(10, 25));
+        txtNumLinea.setPreferredSize(new java.awt.Dimension(20, 50));
         jPanel2.add(txtNumLinea, java.awt.BorderLayout.LINE_START);
         txtNumLinea.getAccessibleContext().setAccessibleName("");
 
@@ -175,17 +175,17 @@ public class Interfaz extends javax.swing.JFrame {
         PnlToken.setPreferredSize(new java.awt.Dimension(400, 100));
         PnlToken.setLayout(new java.awt.BorderLayout());
 
-        jScrollPane1.setBorder(javax.swing.BorderFactory.createTitledBorder("Tabla de Tokens"));
+        jScrollPane1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Tabla de Simbolos", 0, 0, new java.awt.Font("Microsoft Sans Serif", 0, 12))); // NOI18N
         jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
         jScrollPane1.setPreferredSize(new java.awt.Dimension(200, 436));
 
-        TblAnalisis.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
+        TblAnalisis.setFont(new java.awt.Font("Roboto", 1, 12)); // NOI18N
         TblAnalisis.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Linea", "Token", "Componente"
+                "Linea", "Token", "Valor"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -204,9 +204,10 @@ public class Interfaz extends javax.swing.JFrame {
         }
 
         PnlToken.add(jScrollPane1, java.awt.BorderLayout.CENTER);
+        jScrollPane1.getAccessibleContext().setAccessibleDescription("Tabla de simbolos");
 
         jPanel1.setBackground(new java.awt.Color(247, 247, 247));
-        jPanel1.setPreferredSize(new java.awt.Dimension(20, 100));
+        jPanel1.setPreferredSize(new java.awt.Dimension(10, 100));
         jPanel1.setLayout(new java.awt.GridLayout(20, 0, 0, 2));
         PnlToken.add(jPanel1, java.awt.BorderLayout.LINE_START);
 
@@ -220,6 +221,7 @@ public class Interfaz extends javax.swing.JFrame {
         consola.setLayout(new java.awt.BorderLayout());
 
         PanelControlesSintactico.setMinimumSize(new java.awt.Dimension(0, 24));
+        PanelControlesSintactico.setPreferredSize(new java.awt.Dimension(711, 44));
 
         btnAnalizadorLexico.setText("Analizador léxico");
         btnAnalizadorLexico.addActionListener(new java.awt.event.ActionListener() {
@@ -262,7 +264,7 @@ public class Interfaz extends javax.swing.JFrame {
                 .addComponent(btnAnalizadorSemantico)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnGeneradorCodigoIntermedio)
-                .addContainerGap(111, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         PanelControlesSintacticoLayout.setVerticalGroup(
             PanelControlesSintacticoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -270,10 +272,10 @@ public class Interfaz extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(PanelControlesSintacticoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAnalizadorSintactico)
-                    .addComponent(btnAnalizadorLexico)
                     .addComponent(btnAnalizadorSemantico)
-                    .addComponent(btnGeneradorCodigoIntermedio))
-                .addContainerGap(16, Short.MAX_VALUE))
+                    .addComponent(btnGeneradorCodigoIntermedio)
+                    .addComponent(btnAnalizadorLexico))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         consola.add(PanelControlesSintactico, java.awt.BorderLayout.PAGE_START);
@@ -480,6 +482,11 @@ public class Interfaz extends javax.swing.JFrame {
     }//GEN-LAST:event_formPropertyChange
 
     private void btnAnalizadorLexicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnalizadorLexicoActionPerformed
+        
+        if (this.errorLexico()) {
+            return;
+        }
+        
         DefaultTableModel modelo = (DefaultTableModel) TblAnalisis.getModel();
         modelo.setRowCount(0);
         try {
@@ -527,61 +534,47 @@ public class Interfaz extends javax.swing.JFrame {
         Reader reader = new BufferedReader(new BufferedReader(new StringReader(codigo)));
         AnalizadorLexico lexico;
         AnalizadorSintactico sintactico;
-        
 
         if (errorLexico()) {
-            
+            return;    
+        }
+        
+        lexico = new AnalizadorLexico(reader);
+        lexico.estilo.insertarCodigoPane(txtCode);
+        sintactico = new AnalizadorSintactico(lexico);
+
+        try {
+
+            sintactico.parse();
+            arbolSintactico = sintactico.nodoPrincipal;
+            generarArbolSintaxis(sintactico);
+
             this.writeMessageInConsole(
-                "Se detectaron errores lexicos. No se puede continuar",
-                TypeConsoleMessage.ERROR
+                "Analisis sintáctico finalizado con exito",
+                TypeConsoleMessage.INFO
             );
-            
-        } else {
-            lexico = new AnalizadorLexico(reader);
-            lexico.estilo.insertarCodigoPane(txtCode);
-            sintactico = new AnalizadorSintactico(lexico);
 
-            try {
-
-                sintactico.parse();
-                arbolSintactico = sintactico.nodoPrincipal;
-                generarArbolSintaxis(sintactico);
+        } catch (Exception ex) {
+            if (sintactico.charErrorDetec() != -1 && sintactico.charErrorDetec() != 0) {
+                int diezPorciento = (int) (codigo.substring(0, sintactico.charErrorDetec()).length() * 0.10);
                 
-                this.writeMessageInConsole(
-                    "Analisis sintáctico finalizado con exito",
-                    TypeConsoleMessage.INFO
-                );
-
-            } catch (Exception ex) {
-                if (sintactico.charErrorDetec() != -1 && sintactico.charErrorDetec() != 0) {
-                    int diezPorciento = (int) (codigo.substring(0, sintactico.charErrorDetec()).length() * 0.10);
-                    System.out.println("10% = " + diezPorciento);
-                    int tamTextoFinal = sintactico.estilo.getTexto().length();
-                    String textoCargado = "";
-                    try {
-                        textoCargado = sintactico.estilo.doc.getText(0, tamTextoFinal);
-                    } catch (BadLocationException ex1) {
-                        Logger.getLogger(Interfaz.class.getName()).log(Level.SEVERE, null, ex1);
-                    }
-                    String errores = "Error en codigo:\n\t..." + codigo.substring(diezPorciento, sintactico.charErrorDetec());
-                    try {
-                        sintactico.estilo.doc.insertString(tamTextoFinal, errores, null);
-                    } catch (BadLocationException ex1) {
-                        Logger.getLogger(Interfaz.class.getName()).log(Level.SEVERE, null, ex1);
-                    }
-                    sintactico.estilo.pintaAzul(tamTextoFinal, (sintactico.estilo.getTexto() + errores).length());
-                    txtErrores.setDocument(sintactico.estilo.componente.getDocument());
+                int tamTextoFinal = sintactico.estilo.getTexto().length();
+                String textoCargado = "";
+                try {
+                    textoCargado = sintactico.estilo.doc.getText(0, tamTextoFinal);
+                } catch (BadLocationException ex1) {
+                    Logger.getLogger(Interfaz.class.getName()).log(Level.SEVERE, null, ex1);
                 }
-                
+                String errores = "Error sintactico en :\n\t..." + codigo.substring(diezPorciento, sintactico.charErrorDetec());
                 this.writeMessageInConsole(
-                    "Error sintactico",
+                    errores,
                     TypeConsoleMessage.ERROR
                 );
-                
-                Logger.getLogger(Interfaz.class.getName()).log(Level.SEVERE, null, ex);
             }
 
         }
+
+        
 
     }//GEN-LAST:event_btnAnalizadorSintacticoActionPerformed
 
@@ -589,7 +582,10 @@ public class Interfaz extends javax.swing.JFrame {
         txtErrores.setText("");
         AnalizadorSintactico sintactico_a = null;
         if (errorLexico()) {
-            this.writeMessageInConsole("Se detectaron errores lexicos. No se puede continuar", TypeConsoleMessage.ERROR);
+            this.writeMessageInConsole(
+                "Se detectaron errores lexicos. No se puede continuar",
+                TypeConsoleMessage.ERROR
+            );
         } else {
             String codigo = txtCode.getText();
             Reader reader_a = new BufferedReader(new BufferedReader(new StringReader(codigo)));
@@ -693,6 +689,10 @@ public class Interfaz extends javax.swing.JFrame {
                     break;
                 }
                 if (lexico.nameToken.equals("ERROR")) {
+                    this.writeMessageInConsole(
+                        "Token no identificado.\n\t Token: " + lexico.yytext(),
+                        TypeConsoleMessage.ERROR
+                    );
                     return true;
                 }
             } catch (IOException ex) {

@@ -237,24 +237,20 @@ public class CodigoIntermedio {
 
     private String simOperRel(String operador) {
         switch (operador) {
-            case "mayor":
+            case ">":
                 return ">";
-            case "menor":
+            case "<":
                 return "<";
-            case "igual":
+            case "==":
                 return "==";
-            case "diferente":
+            case "!=":
                 return "!=";
-            case "mayorigual":
+            case ">=":
                 return ">=";
-            case "menorigual":
+            case "<=":
                 return "==";
-            case "no":
+            case "!":
                 return "!";
-            case "Y":
-                return "&&";
-            case "O":
-                return "||";
         }
         return null;
     }
