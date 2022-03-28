@@ -41,17 +41,14 @@ public class vizCodigo extends javax.swing.JFrame {
 
         jTableCuadruplos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Operador", "Arg1", "Arg2", "Resultado"
+                "Operador", "Argumento 1", "Argumento 2", "Resultado"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                true, false, true, false
+                false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {

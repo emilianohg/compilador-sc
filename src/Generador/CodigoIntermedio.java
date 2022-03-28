@@ -31,8 +31,6 @@ public class CodigoIntermedio {
     
     
     private String parseOperator(String op) {
-        System.out.println("oppppp");
-        System.out.println(op);
         if(op.equals("*")) return "MULT";
         if(op.equals("/")) return "DIV";
         if(op.equals("+")) return "ADD";
