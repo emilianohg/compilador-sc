@@ -1,21 +1,18 @@
-package Interfaz;
+package Main;
 
-import Generador.Buscador;
-import Generador.CodigoIntermedio;
-import Generador.vizCodigo;
+import Intermedio.CodigoIntermedio;
+import Intermedio.ModalCuadruplos;
 import Lexico.AnalizadorLexico;
-import Lexico.Pintar;
+import Lexico.PaintTextBox;
 import Semantico.AnalizadorSemantico;
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import Sintactico.AnalizadorSintactico;
 import java.io.IOException;
 
 import java.io.Reader;
 import java.io.StringReader;
-import java.util.StringTokenizer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
@@ -25,21 +22,12 @@ import javax.swing.table.DefaultTableModel;
 import java.nio.file.Paths;
 import Sintactico.Nodo;
 import java.awt.Color;
-import java.awt.Point;
 
 import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.nio.file.Path;
-import javax.swing.JTextPane;
 
 import javax.swing.text.BadLocationException;
-import java.awt.event.AdjustmentEvent;
-import java.awt.event.AdjustmentListener;
-import java.io.UnsupportedEncodingException;
-import java_cup.runtime.Scanner;
-import javax.swing.DefaultBoundedRangeModel;
-import javax.swing.JScrollBar;
-import javax.swing.text.Document;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import java.util.ArrayList;
@@ -70,12 +58,21 @@ public class Interfaz extends javax.swing.JFrame {
         txtNumLinea.setParagraphAttributes(attribs, true);
 
         ThreadNumberCode nC = new ThreadNumberCode();
-        abrirArchivoCodigo("estructura_if.txt", txtCode);
+        String text = "var pi = 3.1416;\n" +
+                "var radio = 1;\n" +
+                "\n" +
+                "if(radio > pi) {\n" +
+                "    radio = pi * 2;\n" +
+                "} else {\n" +
+                "    radio = pi + 1;\n" +
+                "};";
+        
+        txtCode.setText(text);
         nC.start();
     }
     
     private void writeMessageInConsole(String text, TypeConsoleMessage type) {
-        Pintar mensaje = new Pintar();
+        PaintTextBox mensaje = new PaintTextBox();
         mensaje.insertarCodigo(text);
         if (type == TypeConsoleMessage.ERROR) {
             mensaje.pintaRojoFuerte(0, mensaje.getTexto().length());
@@ -118,7 +115,7 @@ public class Interfaz extends javax.swing.JFrame {
         jMenuItem1 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("KidCode");
+        setTitle("Lenguaje SC");
         setPreferredSize(new java.awt.Dimension(1024, 700));
         setSize(new java.awt.Dimension(800, 600));
         addPropertyChangeListener(new java.beans.PropertyChangeListener() {
@@ -126,7 +123,6 @@ public class Interfaz extends javax.swing.JFrame {
                 formPropertyChange(evt);
             }
         });
-        getContentPane().setLayout(new java.awt.BorderLayout());
 
         splitPaneCentral.setDividerSize(2);
         splitPaneCentral.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
@@ -168,7 +164,7 @@ public class Interfaz extends javax.swing.JFrame {
         PnlToken.setPreferredSize(new java.awt.Dimension(400, 100));
         PnlToken.setLayout(new java.awt.BorderLayout());
 
-        jScrollPane1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Tabla de Simbolos", 0, 0, new java.awt.Font("Microsoft Sans Serif", 0, 12))); // NOI18N
+        jScrollPane1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Tokens", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Microsoft Sans Serif", 0, 12))); // NOI18N
         jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
         jScrollPane1.setPreferredSize(new java.awt.Dimension(200, 436));
 
@@ -274,7 +270,7 @@ public class Interfaz extends javax.swing.JFrame {
         consola.add(PanelControlesSintactico, java.awt.BorderLayout.PAGE_START);
 
         txtErrores.setEditable(false);
-        txtErrores.setBorder(javax.swing.BorderFactory.createTitledBorder("Consola"));
+        txtErrores.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
         txtErrores.setFont(new java.awt.Font("Roboto", 1, 12)); // NOI18N
         jScrollPane3.setViewportView(txtErrores);
 
@@ -561,6 +557,11 @@ public class Interfaz extends javax.swing.JFrame {
                     errores,
                     TypeConsoleMessage.ERROR
                 );
+            } else {
+                this.writeMessageInConsole(
+                    "Error sintactico",
+                    TypeConsoleMessage.ERROR
+                );
             }
 
         }
@@ -637,7 +638,7 @@ public class Interfaz extends javax.swing.JFrame {
             System.out.println("HOLA");
             ci.recorrerArbolSintactico(this.arbolSintactico);
             ci.imprimirCodigo();
-            vizCodigo vCodigo = new vizCodigo(ci.getCodigo());
+            ModalCuadruplos vCodigo = new ModalCuadruplos(ci.getCodigo());
             vCodigo.show();
         }
     }//GEN-LAST:event_btnGeneradorCodigoIntermedioActionPerformed
@@ -695,35 +696,6 @@ public class Interfaz extends javax.swing.JFrame {
         }
 
         return false;
-    }
-
-    private void abrirArchivoCodigo(String nombreArchivo, JTextPane txt) {
-        this.arbolSintactico = null;
-        String url = Paths.get(".").toAbsolutePath().normalize().toString();
-        String path = url + "\\src\\ejemplos\\" + nombreArchivo;
-        String aux = "";
-        String texto = "";
-        boolean existe;
-        try {
-            File archivo = new File(path);
-            FileReader archivos = new FileReader(archivo);
-            BufferedReader lee = new BufferedReader(archivos);
-            try {
-                while ((aux = lee.readLine()) != null) {
-                    texto += aux + "\n";
-                    existe = true;
-                }
-            } catch (IOException ex) {
-                Logger.getLogger(Interfaz.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            lee.close();
-            archivos.close();
-            txt.setText(texto);
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(Interfaz.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(Interfaz.class.getName()).log(Level.SEVERE, null, ex);
-        }
     }
 
     class ThreadNumberCode extends Thread {

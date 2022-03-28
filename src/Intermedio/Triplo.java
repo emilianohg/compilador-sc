@@ -1,4 +1,4 @@
-package Generador;
+package Intermedio;
 
 
 public class Triplo {

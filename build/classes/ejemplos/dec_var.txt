@@ -1,4 +1,0 @@
-INICIO
-    var myVariable;
-    var myVariable1, myVariable2, myVariable3;
-FIN

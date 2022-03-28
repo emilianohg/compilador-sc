@@ -347,7 +347,7 @@ public class AnalizadorLexico implements java_cup.runtime.Scanner {
   /* user code: */
 
 
-public Pintar estilo = new Pintar();
+public PaintTextBox estilo = new PaintTextBox();
 
 public String nameToken = null;
 public int numLinea(){

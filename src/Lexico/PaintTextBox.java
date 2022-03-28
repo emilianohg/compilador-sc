@@ -9,7 +9,7 @@ import javax.swing.text.StyleConstants;
 import javax.swing.text.StyleContext;
 import javax.swing.text.StyledDocument;
 
-public class Pintar {
+public class PaintTextBox {
 
     public JTextPane componente = new JTextPane();
     //public StyleContext sc = new StyleContext();
@@ -17,10 +17,10 @@ public class Pintar {
     public StyledDocument doc;
     private String texto;
 
-    public Pintar() {
+    public PaintTextBox() {
     }
 
-    public Pintar(JTextPane componente) {
+    public PaintTextBox(JTextPane componente) {
         this.componente = componente;
     }
 

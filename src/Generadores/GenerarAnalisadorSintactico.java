@@ -15,10 +15,8 @@ public class GenerarAnalisadorSintactico {
      */
     public static void main(String[] args) {
 
-        System.out.println("\n*** Generando ***\n");
-
-        String archLexico = "C:\\dev\\KidCode\\src\\Lexico\\Lexer.flex";;
-        String archSintactico = "C:\\dev\\KidCode\\src\\Sintactico\\Gramatica.cup";;
+        String archLexico = "C:\\dev\\LenguajeSC\\src\\Lexico\\Lexer.flex";;
+        String archSintactico = "C:\\dev\\LenguajeSC\\src\\Sintactico\\Gramatica.cup";;
         String[] alexico = {archLexico};
         String[] asintactico = {"-parser", "AnalizadorSintactico", archSintactico};
         jflex.Main.main(alexico);

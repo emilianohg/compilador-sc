@@ -1,4 +1,4 @@
-package Interfaz;
+package Main;
 
 public class Identifier {
     private final String type;

@@ -1,5 +1,5 @@
 
-package Generador;
+package Intermedio;
 
 public class Cuadruplo {
     private final String operator;

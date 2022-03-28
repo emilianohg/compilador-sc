@@ -3,33 +3,82 @@
   <component name="ChangeListManager">
     <list default="true" id="51d52969-c20e-48fb-bf6c-45cc0eedf96d" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/Generador/CodigoIntermedio.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/Generador/CodigoIntermedio.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.xml" beforeDir="false" afterPath="$PROJECT_DIR$/build.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/built-jar.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/Generador/AnalizadorCodigo.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/Generador/Buscador.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/Generador/CodigoIntermedio.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/Generador/Triplo.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/Generador/vizCodigo.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/Generador/vizCodigo.form" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/Generadores/GenerarAnalisadorSintactico.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/Generadores/GenerarAnalisadorSintactico.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/Generadores/GenerarAnalizadorLexico.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/Generadores/GenerarAnalizadorLexico.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/Interfaz/Interfaz$9.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/Interfaz/Interfaz$9.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/Interfaz/Interfaz$ThreadNumberCode.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/Interfaz/Interfaz$ThreadNumberCode.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/Interfaz/Interfaz.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/Interfaz/Interfaz.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/Interfaz/Interfaz$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/Interfaz/Interfaz$2.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/Interfaz/Interfaz$3.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/Interfaz/Interfaz$4.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/Interfaz/Interfaz$5.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/Interfaz/Interfaz$6.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/Interfaz/Interfaz$7.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/Interfaz/Interfaz$8.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/Interfaz/Interfaz$9.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/Interfaz/Interfaz$ThreadNumberCode.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/Interfaz/Interfaz.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/Interfaz/Interfaz.form" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/Lexico/AnalizadorLexico.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/Lexico/AnalizadorLexico.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/Lexico/kidcode.flex" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/Sintactico/AnalizadorSintactico$CUP$AnalizadorSintactico$actions.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/Sintactico/AnalizadorSintactico$CUP$AnalizadorSintactico$actions.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/Lexico/Pintar.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/Sintactico/AnalizadorSintactico.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/Sintactico/AnalizadorSintactico.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/Sintactico/Gramatica.cup" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/Sintactico/Gramatica.cup" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/Sintactico/sym.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/Sintactico/sym.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/ejemplos/estructura_if.txt" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/ejemplos/estructura_if.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/img/Arbol.dot" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/img/Arbol.dot" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/pruebas/NewMain1.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/pruebas/NewMain1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Generador/CodigoIntermedio.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Generador/CodigoIntermedio.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/Sintactico/Nodo.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/Sintactico/Nodo.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/ejemplos/ciclo_mientras.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/ejemplos/ciclo_repetir.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/ejemplos/condi.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/ejemplos/dec_asig_var.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/ejemplos/dec_var.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/ejemplos/estructura_basica.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/ejemplos/estructura_if.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/ejemplos/imprimir.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/ejemplos/kidcode.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/ejemplos/leer.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/pruebas/NewMain.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/pruebas/NewMain1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/pruebas/Nodo.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/pruebas/Pila.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/capturas/arbol sintactico.PNG" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/capturas/codigo intermedio.PNG" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/capturas/estilos.PNG" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/capturas/interfaz.PNG" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/nbproject/build-impl.xml" beforeDir="false" afterPath="$PROJECT_DIR$/nbproject/build-impl.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nbproject/genfiles.properties" beforeDir="false" afterPath="$PROJECT_DIR$/nbproject/genfiles.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nbproject/private/private.properties" beforeDir="false" afterPath="$PROJECT_DIR$/nbproject/private/private.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nbproject/private/private.xml" beforeDir="false" afterPath="$PROJECT_DIR$/nbproject/private/private.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nbproject/project.properties" beforeDir="false" afterPath="$PROJECT_DIR$/nbproject/project.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nbproject/project.xml" beforeDir="false" afterPath="$PROJECT_DIR$/nbproject/project.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Generador/AnalizadorCodigo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Intermedio/AnalizadorCodigo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Generador/Buscador.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Intermedio/Buscador.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Generador/CodigoIntermedio.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Intermedio/CodigoIntermedio.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Generador/Cuadruplo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Intermedio/Cuadruplo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Generador/Triplo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Intermedio/Triplo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Generador/vizCodigo.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/Intermedio/ModalCuadruplos.form" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Generador/vizCodigo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Intermedio/ModalCuadruplos.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Generadores/GenerarAnalisadorSintactico.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Generadores/GenerarAnalisadorSintactico.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Generadores/GenerarAnalizadorLexico.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Generadores/GenerarAnalizadorLexico.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Interfaz/Interfaz.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Interfaz/Interfaz.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Interfaz/Identifier.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/Identifier.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Interfaz/Interfaz.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/Interfaz.form" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Interfaz/Interfaz.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/Interfaz.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Lexico/AnalizadorLexico.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Lexico/AnalizadorLexico.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Lexico/kidcode.flex" beforeDir="false" afterPath="$PROJECT_DIR$/src/Lexico/lexer.flex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Lexico/Pintar.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Lexico/PaintTextBox.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Sintactico/AnalizadorSintactico.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Sintactico/AnalizadorSintactico.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Sintactico/Gramatica.cup" beforeDir="false" afterPath="$PROJECT_DIR$/src/Sintactico/Gramatica.cup" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Sintactico/sym.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Sintactico/sym.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ejemplos/estructura_if.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/ejemplos/estructura_if.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/img/Arbol.dot" beforeDir="false" afterPath="$PROJECT_DIR$/src/img/Arbol.dot" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pruebas/NewMain1.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/pruebas/NewMain1.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ejemplos/ciclo_mientras.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ejemplos/ciclo_repetir.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ejemplos/condi.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ejemplos/dec_asig_var.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ejemplos/dec_var.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ejemplos/estructura_basica.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ejemplos/estructura_if.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ejemplos/imprimir.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ejemplos/kidcode.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ejemplos/leer.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pruebas/NewMain.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pruebas/NewMain1.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -69,10 +118,22 @@
       <updated>1572209995979</updated>
       <workItem from="1572209999659" duration="481000" />
       <workItem from="1648458822905" duration="287000" />
+      <workItem from="1648472074186" duration="1119000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>

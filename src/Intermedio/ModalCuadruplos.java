@@ -1,11 +1,11 @@
-package Generador;
+package Intermedio;
 
 import javax.swing.table.DefaultTableModel;
 
-public class vizCodigo extends javax.swing.JFrame {
+public class ModalCuadruplos extends javax.swing.JFrame {
 
 
-    public vizCodigo(Cuadruplo[] cuadruplos) {
+    public ModalCuadruplos(Cuadruplo[] cuadruplos) {
         initComponents();
         DefaultTableModel modelo = (DefaultTableModel) jTableCuadruplos.getModel();
         for(Cuadruplo cuadruplo: cuadruplos){
@@ -36,9 +36,12 @@ public class vizCodigo extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Vizualizador de código intermedio");
+        setPreferredSize(new java.awt.Dimension(552, 402));
         setType(java.awt.Window.Type.POPUP);
-        getContentPane().setLayout(new java.awt.BorderLayout());
 
+        jScrollPane2.setPreferredSize(new java.awt.Dimension(550, 402));
+
+        jTableCuadruplos.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jTableCuadruplos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -55,6 +58,7 @@ public class vizCodigo extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        jTableCuadruplos.setUpdateSelectionOnSort(false);
         jScrollPane2.setViewportView(jTableCuadruplos);
         if (jTableCuadruplos.getColumnModel().getColumnCount() > 0) {
             jTableCuadruplos.getColumnModel().getColumn(0).setResizable(false);

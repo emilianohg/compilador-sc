@@ -7,7 +7,7 @@
 package Sintactico;
 
 import java_cup.runtime.*;
-import Lexico.Pintar;
+import Lexico.PaintTextBox;
 
 /** CUP v0.11a beta 20060608 generated parser.
   * @version Mon Mar 28 00:52:58 MST 2022
@@ -296,7 +296,7 @@ public class AnalizadorSintactico extends java_cup.runtime.lr_parser {
 
     public Symbol simboloAnterior;
     public Nodo nodoPrincipal;
-    public Pintar estilo = new Pintar();
+    public PaintTextBox estilo = new PaintTextBox();
     private int guia = 0;
     private int conError = 0;
     public String textError = "";

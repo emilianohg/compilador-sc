@@ -1,5 +1,0 @@
-INICIO
-    var myVariable;
-    imprimir("el valor de myVariable es: ",myVariable);
-FIN
-
