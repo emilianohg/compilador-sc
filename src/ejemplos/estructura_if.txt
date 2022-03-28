@@ -1,8 +1,8 @@
-var h = 0;
+var pi = 3.1416;
+var radio = 12;
 
-if(h > 10) {
-    h = 4;
-    imprimir("es mayor");
+if(radio > pi) {
+    radio = pi;
 } else {
-    h = 10;
+    radio = 1;
 };

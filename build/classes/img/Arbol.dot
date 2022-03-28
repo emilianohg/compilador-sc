@@ -3,12 +3,12 @@ digraph G {node[shape=box, style=filled, color=Gray95]; edge[color=blue];rankdir
 node8[label="PAL_VARIABLE
 <var>"]
 node1[label="NOMBRE_VAR
-<h>"]
+<pi>"]
 node0[label="LISTA_VARIABLES"]
 node6[label="OPER_ASIG_IGUAL
 <=>"]
-node3[label="VALOR_ENT
-<0>"]
+node3[label="VALOR_FLO
+<3.1416>"]
 node2[label="TIPO_VALOR_COMPATIBLE"]
 node4[label="TIPO_VALOR"]
 node5[label="ASIGNACION"]
@@ -17,85 +17,87 @@ node10[label="PUNTO Y COMO
 <;>"]
 node9[label="ESTRUCTURAS"]
 node11[label="CODIGO"]
-node52[label="CONDICION_SI
-<if>"]
-node53[label="OPER_AGRUP_PI
-<(>"]
+node20[label="PAL_VARIABLE
+<var>"]
 node13[label="NOMBRE_VAR
-<h>"]
-node12[label="TIPO_VALOR_COMPATIBLE"]
-node14[label="TIPO_VALOR"]
-node19[label="OPER_REL
-<>>"]
-node16[label="VALOR_ENT
-<10>"]
-node15[label="TIPO_VALOR_COMPATIBLE"]
-node17[label="TIPO_VALOR"]
-node18[label="CONDICION_BAJA"]
-node20[label="LISTA_CONDICIONES"]
-node54[label="OPER_AGRUP_PF
-<)>"]
-node55[label="OPER_AGRUP_LLI
-<{>"]
-node22[label="NOMBRE_VAR
-<h>"]
-node21[label="LISTA_VARIABLES"]
-node27[label="OPER_ASIG_IGUAL
+<radio>"]
+node12[label="LISTA_VARIABLES"]
+node18[label="OPER_ASIG_IGUAL
 <=>"]
-node24[label="VALOR_ENT
-<4>"]
-node23[label="TIPO_VALOR_COMPATIBLE"]
-node25[label="TIPO_VALOR"]
-node26[label="ASIGNACION"]
-node29[label="PUNTO Y COMO
+node15[label="VALOR_ENT
+<12>"]
+node14[label="TIPO_VALOR_COMPATIBLE"]
+node16[label="TIPO_VALOR"]
+node17[label="ASIGNACION"]
+node19[label="DECLARACION"]
+node22[label="PUNTO Y COMO
 <;>"]
-node28[label="ESTRUCTURAS"]
-node30[label="CODIGO"]
-node35[label="IMPRIMIR
-<imprimir>"]
-node36[label="OPER_AGRUP_PI
+node21[label="ESTRUCTURAS"]
+node23[label="CODIGO"]
+node54[label="CONDICION_SI
+<if>"]
+node55[label="OPER_AGRUP_PI
 <(>"]
-node32[label="VALOR_STRING
-<es mayor> "]
-node31[label="TIPO_VALOR"]
-node33[label="LISTA_IMPRECIONES"]
-node37[label="OPER_AGRUP_PF
+node25[label="NOMBRE_VAR
+<radio>"]
+node24[label="TIPO_VALOR_COMPATIBLE"]
+node26[label="TIPO_VALOR"]
+node31[label="OPER_REL
+<>>"]
+node28[label="NOMBRE_VAR
+<pi>"]
+node27[label="TIPO_VALOR_COMPATIBLE"]
+node29[label="TIPO_VALOR"]
+node30[label="CONDICION_BAJA"]
+node32[label="LISTA_CONDICIONES"]
+node56[label="OPER_AGRUP_PF
 <)>"]
-node34[label="IMPRIMIR_DATO"]
-node39[label="PUNTO Y COMO
+node57[label="OPER_AGRUP_LLI
+<{>"]
+node34[label="NOMBRE_VAR
+<radio>"]
+node33[label="LISTA_VARIABLES"]
+node39[label="OPER_ASIG_IGUAL
+<=>"]
+node36[label="NOMBRE_VAR
+<pi>"]
+node35[label="TIPO_VALOR_COMPATIBLE"]
+node37[label="TIPO_VALOR"]
+node38[label="ASIGNACION"]
+node41[label="PUNTO Y COMO
 <;>"]
-node38[label="ESTRUCTURAS"]
-node40[label="CODIGO"]
+node40[label="ESTRUCTURAS"]
+node42[label="CODIGO"]
+node60[label="OPER_AGRUP_LLF
+<}>"]
+node59[label="CONDICION_SINO
+<else>"]
+node61[label="OPER_AGRUP_LLI
+<{>"]
+node44[label="NOMBRE_VAR
+<radio>"]
+node43[label="LISTA_VARIABLES"]
+node49[label="OPER_ASIG_IGUAL
+<=>"]
+node46[label="VALOR_ENT
+<1>"]
+node45[label="TIPO_VALOR_COMPATIBLE"]
+node47[label="TIPO_VALOR"]
+node48[label="ASIGNACION"]
+node51[label="PUNTO Y COMO
+<;>"]
+node50[label="ESTRUCTURAS"]
+node52[label="CODIGO"]
 node58[label="OPER_AGRUP_LLF
 <}>"]
-node57[label="CONDICION_SINO
-<else>"]
-node59[label="OPER_AGRUP_LLI
-<{>"]
-node42[label="NOMBRE_VAR
-<h>"]
-node41[label="LISTA_VARIABLES"]
-node47[label="OPER_ASIG_IGUAL
-<=>"]
-node44[label="VALOR_ENT
-<10>"]
-node43[label="TIPO_VALOR_COMPATIBLE"]
-node45[label="TIPO_VALOR"]
-node46[label="ASIGNACION"]
-node49[label="PUNTO Y COMO
+node53[label="CONDICIONALES"]
+node63[label="PUNTO Y COMO
 <;>"]
-node48[label="ESTRUCTURAS"]
-node50[label="CODIGO"]
-node56[label="OPER_AGRUP_LLF
-<}>"]
-node51[label="CONDICIONALES"]
-node61[label="PUNTO Y COMO
-<;>"]
-node60[label="ESTRUCTURAS"]
-node62[label="CODIGO"]
-node63[label="INIT"]
+node62[label="ESTRUCTURAS"]
+node64[label="CODIGO"]
+node65[label="INIT"]
 
-node63->node62->node11->node9->node7->node8
+node65->node64->node23->node11->node9->node7->node8
 node7->node5->node0->node1
 
 node5->node6
@@ -107,55 +109,57 @@ node5->node4->node2->node3
 node9->node10
 
 
-node62->node60->node51->node52
-node51->node53
-node51->node20->node18->node14->node12->node13
+node23->node21->node19->node20
+node19->node17->node12->node13
 
-
-node18->node19
-node18->node17->node15->node16
+node17->node18
+node17->node16->node14->node15
 
 
 
 
-node51->node54
-node51->node55
-node51->node40->node30->node28->node26->node21->node22
-
-node26->node27
-node26->node25->node23->node24
+node21->node22
 
 
-
-node28->node29
-
-
-node40->node38->node34->node35
-node34->node36
-node34->node33->node31->node32
+node64->node62->node53->node54
+node53->node55
+node53->node32->node30->node26->node24->node25
 
 
-node34->node37
+node30->node31
+node30->node29->node27->node28
+
+
+
+
+node53->node56
+node53->node57
+node53->node42->node40->node38->node33->node34
 
 node38->node39
+node38->node37->node35->node36
 
 
-node51->node58
-node51->node57
-node51->node59
-node51->node50->node48->node46->node41->node42
 
-node46->node47
-node46->node45->node43->node44
+node40->node41
 
 
+node53->node60
+node53->node59
+node53->node61
+node53->node52->node50->node48->node43->node44
 
 node48->node49
+node48->node47->node45->node46
 
 
-node51->node56
 
-node60->node61
+node50->node51
+
+
+node53->node58
+
+node62->node63
 
 
 
