@@ -1,13 +1,13 @@
 digraph G {node[shape=box, style=filled, color=Gray95]; edge[color=blue];rankdir=UD 
 
-node8[label="PAL_VARIABLE
+node8[label="VARIABLE
 <var>"]
-node1[label="NOMBRE_VAR
+node1[label="IDENTIFIER
 <pi>"]
 node0[label="LISTA_VARIABLES"]
 node6[label="OPER_ASIG_IGUAL
 <=>"]
-node3[label="VALOR_FLO
+node3[label="NUMBER_FLOAT
 <3.1416>"]
 node2[label="TIPO_VALOR_COMPATIBLE"]
 node4[label="TIPO_VALOR"]
@@ -17,15 +17,15 @@ node10[label="PUNTO Y COMO
 <;>"]
 node9[label="ESTRUCTURAS"]
 node11[label="CODIGO"]
-node20[label="PAL_VARIABLE
+node20[label="VARIABLE
 <var>"]
-node13[label="NOMBRE_VAR
+node13[label="IDENTIFIER
 <radio>"]
 node12[label="LISTA_VARIABLES"]
 node18[label="OPER_ASIG_IGUAL
 <=>"]
 node15[label="VALOR_ENT
-<12>"]
+<1>"]
 node14[label="TIPO_VALOR_COMPATIBLE"]
 node16[label="TIPO_VALOR"]
 node17[label="ASIGNACION"]
@@ -34,70 +34,88 @@ node22[label="PUNTO Y COMO
 <;>"]
 node21[label="ESTRUCTURAS"]
 node23[label="CODIGO"]
-node54[label="CONDICION_SI
+node68[label="IF_STATEMENT
 <if>"]
-node55[label="OPER_AGRUP_PI
+node69[label="PAREN_OPEN
 <(>"]
-node25[label="NOMBRE_VAR
+node25[label="IDENTIFIER
 <radio>"]
 node24[label="TIPO_VALOR_COMPATIBLE"]
 node26[label="TIPO_VALOR"]
 node31[label="OPER_REL
 <>>"]
-node28[label="NOMBRE_VAR
+node28[label="IDENTIFIER
 <pi>"]
 node27[label="TIPO_VALOR_COMPATIBLE"]
 node29[label="TIPO_VALOR"]
 node30[label="CONDICION_BAJA"]
 node32[label="LISTA_CONDICIONES"]
-node56[label="OPER_AGRUP_PF
+node70[label="PAREN_CLOSE
 <)>"]
-node57[label="OPER_AGRUP_LLI
+node71[label="BEGIN_IF
 <{>"]
-node34[label="NOMBRE_VAR
+node34[label="IDENTIFIER
 <radio>"]
 node33[label="LISTA_VARIABLES"]
-node39[label="OPER_ASIG_IGUAL
+node46[label="OPER_ASIG_IGUAL
 <=>"]
-node36[label="NOMBRE_VAR
+node36[label="IDENTIFIER
 <pi>"]
 node35[label="TIPO_VALOR_COMPATIBLE"]
 node37[label="TIPO_VALOR"]
-node38[label="ASIGNACION"]
-node41[label="PUNTO Y COMO
+node39[label="OPER_ART_MUL
+<*>"]
+node38[label="OPERADOR_ARITMETICO"]
+node41[label="VALOR_ENT
+<2>"]
+node40[label="TIPO_VALOR_COMPATIBLE"]
+node42[label="TIPO_VALOR"]
+node43[label="LISTA_VALORES_EXP"]
+node44[label="EXP_ASIG_BASICA"]
+node45[label="ASIGNACION"]
+node48[label="PUNTO Y COMO
 <;>"]
-node40[label="ESTRUCTURAS"]
-node42[label="CODIGO"]
-node60[label="OPER_AGRUP_LLF
+node47[label="ESTRUCTURAS"]
+node49[label="CODIGO"]
+node72[label="CURLY_BRACE_CLOSE
 <}>"]
-node59[label="CONDICION_SINO
+node73[label="ELSE_STATEMENT
 <else>"]
-node61[label="OPER_AGRUP_LLI
+node74[label="BEGIN_ELSE
 <{>"]
-node44[label="NOMBRE_VAR
+node51[label="IDENTIFIER
 <radio>"]
-node43[label="LISTA_VARIABLES"]
-node49[label="OPER_ASIG_IGUAL
+node50[label="LISTA_VARIABLES"]
+node63[label="OPER_ASIG_IGUAL
 <=>"]
-node46[label="VALOR_ENT
+node53[label="IDENTIFIER
+<pi>"]
+node52[label="TIPO_VALOR_COMPATIBLE"]
+node54[label="TIPO_VALOR"]
+node56[label="OPER_ART_SUMA
+<+>"]
+node55[label="OPERADOR_ARITMETICO"]
+node58[label="VALOR_ENT
 <1>"]
-node45[label="TIPO_VALOR_COMPATIBLE"]
-node47[label="TIPO_VALOR"]
-node48[label="ASIGNACION"]
-node51[label="PUNTO Y COMO
+node57[label="TIPO_VALOR_COMPATIBLE"]
+node59[label="TIPO_VALOR"]
+node60[label="LISTA_VALORES_EXP"]
+node61[label="EXP_ASIG_BASICA"]
+node62[label="ASIGNACION"]
+node65[label="PUNTO Y COMO
 <;>"]
-node50[label="ESTRUCTURAS"]
-node52[label="CODIGO"]
-node58[label="OPER_AGRUP_LLF
+node64[label="ESTRUCTURAS"]
+node66[label="CODIGO"]
+node75[label="END_ELSE
 <}>"]
-node53[label="CONDICIONALES"]
-node63[label="PUNTO Y COMO
+node67[label="CONDICIONALES"]
+node77[label="PUNTO Y COMO
 <;>"]
-node62[label="ESTRUCTURAS"]
-node64[label="CODIGO"]
-node65[label="INIT"]
+node76[label="ESTRUCTURAS"]
+node78[label="CODIGO"]
+node79[label="INIT"]
 
-node65->node64->node23->node11->node9->node7->node8
+node79->node78->node23->node11->node9->node7->node8
 node7->node5->node0->node1
 
 node5->node6
@@ -121,9 +139,9 @@ node17->node16->node14->node15
 node21->node22
 
 
-node64->node62->node53->node54
-node53->node55
-node53->node32->node30->node26->node24->node25
+node78->node76->node67->node68
+node67->node69
+node67->node32->node30->node26->node24->node25
 
 
 node30->node31
@@ -132,34 +150,48 @@ node30->node29->node27->node28
 
 
 
-node53->node56
-node53->node57
-node53->node42->node40->node38->node33->node34
+node67->node70
+node67->node71
+node67->node49->node47->node45->node33->node34
 
-node38->node39
-node38->node37->node35->node36
-
-
-
-node40->node41
+node45->node46
+node45->node44->node37->node35->node36
 
 
-node53->node60
-node53->node59
-node53->node61
-node53->node52->node50->node48->node43->node44
+node44->node43->node38->node39
 
-node48->node49
-node48->node47->node45->node46
+node43->node42->node40->node41
 
 
 
-node50->node51
 
 
-node53->node58
+node47->node48
+
+
+node67->node72
+node67->node73
+node67->node74
+node67->node66->node64->node62->node50->node51
 
 node62->node63
+node62->node61->node54->node52->node53
+
+
+node61->node60->node55->node56
+
+node60->node59->node57->node58
+
+
+
+
+
+node64->node65
+
+
+node67->node75
+
+node76->node77
 
 
 

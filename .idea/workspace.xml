@@ -1,15 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="51d52969-c20e-48fb-bf6c-45cc0eedf96d" name="Default Changelist" comment="" />
-    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <list default="true" id="51d52969-c20e-48fb-bf6c-45cc0eedf96d" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/Generador/CodigoIntermedio.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/Generador/CodigoIntermedio.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/Generadores/GenerarAnalisadorSintactico.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/Generadores/GenerarAnalisadorSintactico.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/Generadores/GenerarAnalizadorLexico.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/Generadores/GenerarAnalizadorLexico.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/Interfaz/Interfaz$9.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/Interfaz/Interfaz$9.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/Interfaz/Interfaz$ThreadNumberCode.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/Interfaz/Interfaz$ThreadNumberCode.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/Interfaz/Interfaz.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/Interfaz/Interfaz.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/Lexico/AnalizadorLexico.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/Lexico/AnalizadorLexico.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/Lexico/kidcode.flex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/Sintactico/AnalizadorSintactico$CUP$AnalizadorSintactico$actions.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/Sintactico/AnalizadorSintactico$CUP$AnalizadorSintactico$actions.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/Sintactico/AnalizadorSintactico.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/Sintactico/AnalizadorSintactico.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/Sintactico/Gramatica.cup" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/Sintactico/Gramatica.cup" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/Sintactico/sym.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/Sintactico/sym.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/ejemplos/estructura_if.txt" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/ejemplos/estructura_if.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/img/Arbol.dot" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/img/Arbol.dot" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/pruebas/NewMain1.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/pruebas/NewMain1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Generador/CodigoIntermedio.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Generador/CodigoIntermedio.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Generadores/GenerarAnalisadorSintactico.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Generadores/GenerarAnalisadorSintactico.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Generadores/GenerarAnalizadorLexico.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Generadores/GenerarAnalizadorLexico.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Interfaz/Interfaz.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Interfaz/Interfaz.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Lexico/AnalizadorLexico.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Lexico/AnalizadorLexico.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Lexico/kidcode.flex" beforeDir="false" afterPath="$PROJECT_DIR$/src/Lexico/lexer.flex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Sintactico/AnalizadorSintactico.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Sintactico/AnalizadorSintactico.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Sintactico/Gramatica.cup" beforeDir="false" afterPath="$PROJECT_DIR$/src/Sintactico/Gramatica.cup" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Sintactico/sym.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Sintactico/sym.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ejemplos/estructura_if.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/ejemplos/estructura_if.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/img/Arbol.dot" beforeDir="false" afterPath="$PROJECT_DIR$/src/img/Arbol.dot" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pruebas/NewMain1.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/pruebas/NewMain1.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="ProjectId" id="1Snr2hZJ6r6r14pO7veziK0cDsm" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
   <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.WIDTH" value="581" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
@@ -19,18 +56,7 @@
     <property name="project.structure.side.proportion" value="0.0" />
     <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
   </component>
-  <component name="RunDashboard">
-    <option name="ruleStates">
-      <list>
-        <RuleState>
-          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
-        </RuleState>
-        <RuleState>
-          <option name="name" value="StatusDashboardGroupingRule" />
-        </RuleState>
-      </list>
-    </option>
-  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -42,10 +68,11 @@
       <option name="presentableId" value="Default" />
       <updated>1572209995979</updated>
       <workItem from="1572209999659" duration="481000" />
+      <workItem from="1648458822905" duration="287000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="1" />
+    <option name="version" value="3" />
   </component>
 </project>

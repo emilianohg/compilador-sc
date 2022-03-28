@@ -46,8 +46,8 @@ public String getCodigo(){
 
 "var"
 {
-    nameToken = "PAL_VARIABLE";
-    return new Symbol(sym.PAL_VARIABLE, yychar, yyline,new String(yytext()));
+    nameToken = "VARIABLE";
+    return new Symbol(sym.VARIABLE, yychar, yyline,new String(yytext()));
 }
 
 "Grupo"
@@ -116,8 +116,8 @@ public String getCodigo(){
 
 "if"
 {
-    nameToken = "CONDICION_SI";
-    return new Symbol(sym.CONDICION_SI, yychar, yyline,new String(yytext()));
+    nameToken = "IF_STATEMENT";
+    return new Symbol(sym.IF_STATEMENT, yychar, yyline,new String(yytext()));
 }
 
 "entonces"
@@ -128,8 +128,8 @@ public String getCodigo(){
 
 "else"
 {
-    nameToken = "CONDICION_SINO";
-    return new Symbol(sym.CONDICION_SINO, yychar, yyline,new String(yytext()));
+    nameToken = "ELSE_STATEMENT";
+    return new Symbol(sym.ELSE_STATEMENT, yychar, yyline,new String(yytext()));
 }
 
 "fin_si"
@@ -186,27 +186,27 @@ public String getCodigo(){
 
 "(" 
 {    
-    nameToken = "OPER_AGRUP_PI";
-    return new Symbol(sym.OPER_AGRUP_PI, yychar, yyline,new String(yytext()));
+    nameToken = "PAREN_OPEN";
+    return new Symbol(sym.PAREN_OPEN, yychar, yyline,new String(yytext()));
 }
 
 ")" 
 {
-    nameToken = "OPER_AGRUP_PF";
-    return new Symbol(sym.OPER_AGRUP_PF, yychar, yyline,new String(yytext()));
+    nameToken = "PAREN_CLOSE";
+    return new Symbol(sym.PAREN_CLOSE, yychar, yyline,new String(yytext()));
 }
 
 
 "{" 
 {   
-    nameToken = "OPER_AGRUP_LLI";
-    return new Symbol(sym.OPER_AGRUP_LLI, yychar, yyline,new String(yytext()));
+    nameToken = "CURLY_BRACE_OPEN";
+    return new Symbol(sym.CURLY_BRACE_OPEN, yychar, yyline,new String(yytext()));
 }
 
 "}" 
 {
-    nameToken = "OPER_AGRUP_LLF";
-    return new Symbol(sym.OPER_AGRUP_LLF, yychar, yyline,new String(yytext()));
+    nameToken = "CURLY_BRACE_CLOSE";
+    return new Symbol(sym.CURLY_BRACE_CLOSE, yychar, yyline,new String(yytext()));
 }
 
 
@@ -231,35 +231,35 @@ public String getCodigo(){
 
 
 {Digitos}{Digitos}* {
-    nameToken = "VALOR_ENT";
-    return new Symbol(sym.VALOR_ENT, yychar,yyline,new String(yytext()));
+    nameToken = "NUMBER_INTEGER";
+    return new Symbol(sym.NUMBER_INTEGER, yychar,yyline,new String(yytext()));
 }
 
 
 {Digitos}{Digitos}*"."{Digitos}{Digitos}* 
 {
-    nameToken = "VALOR_FLO";
-    return new Symbol(sym.VALOR_FLO, yychar,yyline,new String(yytext()));
+    nameToken = "NUMBER_FLOAT";
+    return new Symbol(sym.NUMBER_FLOAT, yychar,yyline,new String(yytext()));
 }
 
 
 "\"" ({Letras}|{Digitos}|{Operador}|{Agrupacion}|{Simbolo})* "\"" 
 {
-    nameToken = "VALOR_STRING";
+    nameToken = "TEXT";
     return new Symbol(sym.VALOR_STRING, yychar,yyline,new String(yytext()));
 }
 
 
 {Letras}({Letras}|{Digitos})*
 {
-    nameToken = "NOMBRE_VAR";
-    return new Symbol(sym.NOMBRE_VAR, yychar,yyline,new String(yytext()));
+    nameToken = "IDENTIFIER";
+    return new Symbol(sym.IDENTIFIER, yychar,yyline,new String(yytext()));
 }
 
 ";"
 {
-    nameToken = "PUNTOYCOMA";
-    return new Symbol(sym.PUNTOYCOMA, yychar, yyline,new String(yytext()));
+    nameToken = "SEMICOLON";
+    return new Symbol(sym.SEMICOLON, yychar, yyline,new String(yytext()));
 }
 
 . {

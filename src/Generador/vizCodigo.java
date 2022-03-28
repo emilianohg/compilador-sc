@@ -1,22 +1,23 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Generador;
 
-/**
- *
- * @author Jose
- */
+import javax.swing.table.DefaultTableModel;
+
 public class vizCodigo extends javax.swing.JFrame {
 
-    /**
-     * Creates new form vizCodigo
-     */
-    public vizCodigo(String codigo) {
+
+    public vizCodigo(Cuadruplo[] cuadruplos) {
         initComponents();
-        this.txtCodigo.setText(codigo);
+        DefaultTableModel modelo = (DefaultTableModel) jTableCuadruplos.getModel();
+        for(Cuadruplo cuadruplo: cuadruplos){
+            Object[] row1 = {
+                cuadruplo.getOperator(),
+                cuadruplo.getArg0(),
+                cuadruplo.getArg1(),
+                cuadruplo.getRes()
+            };
+            modelo.addRow(row1);
+        }
+        
         this.setLocationRelativeTo(null);
         this.setSize(300, 400);
     }
@@ -30,20 +31,42 @@ public class vizCodigo extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        txtCodigo = new javax.swing.JTextArea();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTableCuadruplos = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Vizualizador de código intermedio");
         setType(java.awt.Window.Type.POPUP);
+        getContentPane().setLayout(new java.awt.BorderLayout());
 
-        txtCodigo.setEditable(false);
-        txtCodigo.setColumns(20);
-        txtCodigo.setFont(new java.awt.Font("Consolas", 1, 14)); // NOI18N
-        txtCodigo.setRows(5);
-        jScrollPane1.setViewportView(txtCodigo);
+        jTableCuadruplos.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Operador", "Arg1", "Arg2", "Resultado"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                true, false, true, false
+            };
 
-        getContentPane().add(jScrollPane1, java.awt.BorderLayout.CENTER);
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(jTableCuadruplos);
+        if (jTableCuadruplos.getColumnModel().getColumnCount() > 0) {
+            jTableCuadruplos.getColumnModel().getColumn(0).setResizable(false);
+            jTableCuadruplos.getColumnModel().getColumn(1).setResizable(false);
+            jTableCuadruplos.getColumnModel().getColumn(2).setResizable(false);
+            jTableCuadruplos.getColumnModel().getColumn(3).setResizable(false);
+        }
+
+        getContentPane().add(jScrollPane2, java.awt.BorderLayout.CENTER);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -51,7 +74,7 @@ public class vizCodigo extends javax.swing.JFrame {
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea txtCodigo;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable jTableCuadruplos;
     // End of variables declaration//GEN-END:variables
 }

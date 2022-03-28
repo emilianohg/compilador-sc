@@ -1,8 +1,8 @@
 var pi = 3.1416;
-var radio = 12;
+var radio = 1;
 
 if(radio > pi) {
-    radio = pi;
+    radio = pi * 2;
 } else {
-    radio = 1;
+    radio = pi + 1;
 };

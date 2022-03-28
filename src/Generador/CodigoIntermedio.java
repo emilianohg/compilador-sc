@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Generador;
 
 import Sintactico.Nodo;
@@ -10,13 +5,10 @@ import java.util.ArrayList;
 import java.util.Stack;
 import Posfija.Posfija;
 
-/**
- *
- * @author Jose
- */
 public class CodigoIntermedio {
 
     private ArrayList<String> codigo;
+    private ArrayList<Cuadruplo> pila;
     private int gvtemporal;
     private Nodo condicion_alta;
     private String nodoAnterior;
@@ -27,6 +19,7 @@ public class CodigoIntermedio {
 
     public CodigoIntermedio() {
         this.codigo = new ArrayList<>();
+        this.pila = new ArrayList<>();
         this.gvtemporal = -1;
         this.getemporal = -1;
         this.condicion_alta = new Nodo("", "", 0);
@@ -35,9 +28,23 @@ public class CodigoIntermedio {
         this.tempIncCiclo = new Stack<>();
         this.tempVarCiclo = new Stack<>();
     }
+    
+    
+    private String parseOperator(String op) {
+        System.out.println("oppppp");
+        System.out.println(op);
+        if(op.equals("*")) return "MULT";
+        if(op.equals("/")) return "DIV";
+        if(op.equals("+")) return "ADD";
+        if(op.equals("-")) return "MIN";
+        return "NULL";
+    }
+    
 
     public void recorrerArbolSintactico(Nodo arbol) {
         Buscador buscador = new Buscador();
+        System.out.println(arbol.getNombreRaiz());
+
         switch (arbol.getNombreRaiz()) {
             
             case "VARIABLE_DA":
@@ -70,7 +77,7 @@ public class CodigoIntermedio {
                 String etiqueta_0 = "E" + this.getemporal + ":";                
                 this.etiquetas.push(this.getemporal);
                 this.getemporal++;                
-                String condicion = "if false " + this.obtenerVariableAnterior() + " goto E" + this.getemporal + ";";
+                String condicion = "if false " + this.obtenerResultadoAnterior() + " goto E" + this.getemporal + ";";
                 this.etiquetas.push(this.getemporal);
                 this.codigo.add(etiqueta_0);
                 this.codigo.add(condicion);                
@@ -89,7 +96,7 @@ public class CodigoIntermedio {
             case "ASIGNACION":
                 Nodo listaVar = buscador.rastrearNodo(arbol, "LISTA_VARIABLES");
                 //se localizan las variables y se guardan en una pila
-                buscador.cargarPilaConHojaEspecifica(listaVar, "NOMBRE_VAR");
+                buscador.cargarPilaConHojaEspecifica(listaVar, "IDENTIFIER");
                 //se obtine la pila con los nombres de variables
                 Stack<Object> variables = buscador.getPila();
 
@@ -116,8 +123,17 @@ public class CodigoIntermedio {
                 //Se obtiene la exp en notacion posfija
                 ArrayList<Object> expCov = pos.posfija(exp);
                 if (expCov.size() == 1) {
-                    //codigo += ((Nodo)variables.pop()).getValor()+"="+expCov.get(0).toString()+";";
-                    this.codigo.add(((Nodo) variables.pop()).getValor() + "=" + expCov.get(0).toString() + ";");
+                    String var1 = ((Nodo) variables.pop()).getValor();
+                    this.pila.add(
+                        new Cuadruplo(
+                            "MOV",
+                            var1,
+                            expCov.get(0).toString(),
+                            "NULL"
+                        )
+                    );
+                    this.codigo.add("MOV \t" + var1 + "\t" + expCov.get(0).toString() + "\tNULL");
+
                 } else {
                     Stack<Object> auxpila = new Stack<>();
                     for (int i = 0; i < expCov.size(); i++) {
@@ -127,7 +143,15 @@ public class CodigoIntermedio {
                             String val2 = auxpila.pop().toString();
                             String val1 = auxpila.pop().toString();
                             //codigo += "t" + this.gvtemporal + " = " + val1 + expCov.get(i).toString() + val2 + ";\n";
-                            this.codigo.add("t" + this.gvtemporal + " = " + val1 + expCov.get(i).toString() + val2 + ";");
+                            this.pila.add(
+                                new Cuadruplo(
+                                    this.parseOperator(expCov.get(i).toString()),
+                                    ""+val1,
+                                    ""+val2,
+                                    ""+this.gvtemporal
+                                )
+                            );
+                            this.codigo.add(expCov.get(i).toString() + "\t " + val1 + "\t " + val2 + "\t t" + this.gvtemporal);
                             auxpila.push("t" + this.gvtemporal);
 
                         } else {
@@ -136,14 +160,21 @@ public class CodigoIntermedio {
                     }
                     for (int i = 0; i < variables.size(); i++) {
                         //codigo += ((Nodo) variables.get(i)).getValor() + " = t" + this.gvtemporal + ";\n";
-                        this.codigo.add(((Nodo) variables.get(i)).getValor() + " = t" + this.gvtemporal + ";");
+                        this.pila.add(
+                            new Cuadruplo(
+                                "MOV",
+                                ((Nodo) variables.get(i)).getValor(),
+                                "t" + this.gvtemporal,
+                                "NULL"
+                            )
+                        );
+                        this.codigo.add("MOV \t " + ((Nodo) variables.get(i)).getValor() + "\t t" + this.gvtemporal + "\t NULL");
                     }
                 }
 
                 break;
             case "CONDICION_ALTA":
                 this.condicion_alta = arbol;
-                System.out.println("Se asigno");
                 break;
 
             case "CONDICION_BAJA":
@@ -154,6 +185,16 @@ public class CodigoIntermedio {
                 String operando2 = ((Nodo) parametros.pop()).getValor();
                 String operador = simOperRel(((Nodo) parametros.pop()).getValor());
                 String operando1 = ((Nodo) parametros.pop()).getValor();
+                
+                this.pila.add(
+                    new Cuadruplo(
+                        "MIN",
+                        ""+operando1,
+                        ""+operando2,
+                        "t" + this.gvtemporal
+                    )
+                );
+                
                 this.codigo.add("t" + this.gvtemporal + "=" + operando1 + operador + operando2 + ";");
                 
 
@@ -164,22 +205,73 @@ public class CodigoIntermedio {
 //                    this.condicion_alta = null;
 //                }
                 break;
-            case "CONDICION_INICIO":
+            case "BEGIN_IF":
                 this.getemporal++;
-                String if_entonces = "if false " + this.obtenerVariableAnterior() + " goto E" + this.getemporal + ";";
+                String var1 = this.obtenerResultadoAnterior();
+                String if_entonces = "if false " + var1 + " goto E" + this.getemporal + ";";
                 this.codigo.add(if_entonces);
+                this.pila.add(
+                    new Cuadruplo(
+                        "CMP",
+                        "" + var1,
+                        "0",
+                        "NULL"
+                    )
+                );
+                this.pila.add(
+                    new Cuadruplo(
+                        "JE",
+                        "L" + this.getemporal,
+                        "NULL",
+                        "NULL"
+                    )
+                );
                 this.etiquetas.push(this.getemporal);
                 break;
-            case "CONDICION_SINO":
-                String inicio = "E" + this.etiquetas.pop() + ":";
+            case "BEGIN_ELSE":
+                int label = this.etiquetas.pop();
+                String inicio = "LABEL L" + label + "\t NULL \t NULL";
+                
                 this.getemporal++;
                 this.etiquetas.push(this.getemporal);
-                String salto = "goto E" + this.getemporal + ";";
+                
+                String salto = "GOTO \t L" + this.getemporal + "\t NULL \t NULL";
+                
+                
+                this.pila.add(
+                    new Cuadruplo(
+                        "GOTO",
+                        "L" + this.getemporal,
+                        "NULL",
+                        "NULL"
+                    )
+                );
+                
                 this.codigo.add(salto);
+                
+                this.pila.add(
+                    new Cuadruplo(
+                        "LABEL",
+                        "L" + label,
+                        "NULL",
+                        "NULL"
+                    )
+                );
+                
                 this.codigo.add(inicio);
+                
                 break;
-            case "CONDICION_FIN":
-                String fin_si = "E" + this.etiquetas.pop() + ":";
+            case "END_ELSE":
+                int label2 = this.etiquetas.pop();
+                String fin_si = "LABEL \t L" + label2 + "\t NULL \t NULL";
+                this.pila.add(
+                    new Cuadruplo(
+                        "LABEL",
+                        "L" + label2,
+                        "NULL",
+                        "NULL"
+                    )
+                );
                 this.codigo.add(fin_si);
                 break;
             case "LISTA_IMPRECIONES":
@@ -208,31 +300,23 @@ public class CodigoIntermedio {
                 this.codigo.add(variable + "=t" + this.gvtemporal + ";");
                 break;
         }
-
-        //es raiz?        
+        
         if (!arbol.getHojas().isEmpty()) {
             this.nodoAnterior = arbol.getNombreRaiz();
             if (arbol.getNombreRaiz().equals("CONDICION_ALTA")) {
                 System.out.println("-------------------------------------------------");
             }
             for (Nodo hoja : arbol.getHojas()) {
+                System.out.println(hoja.getValor());
                 recorrerArbolSintactico(hoja);
             }
         }
 
     }
 
-    private String obtenerVariableAnterior() {
-        String linea = this.codigo.get(this.codigo.size() - 1);        
-        String aux = "";
-        for (int i = 0; i < linea.length(); i++) {
-            if (linea.charAt(i) == '=') {
-                return aux;
-            } else {
-                aux += linea.charAt(i);
-            }
-        }
-        return null;
+    private String obtenerResultadoAnterior() {
+        Cuadruplo linea = this.pila.get(this.pila.size() - 1);        
+        return linea.getRes();
     }
 
     private String simOperRel(String operador) {
@@ -275,18 +359,16 @@ public class CodigoIntermedio {
     }
 
     public void imprimirCodigo() {
-        System.out.println("<--");
-        for (String linea : this.codigo) {
-            System.out.println(linea.toString());
-        }
-        System.out.println("-->");
+        this.pila.forEach(System.out::println);
     }
 
-    public String getCodigo() {
-        String aux = "";
-        for (String linea : this.codigo) {
+    public Cuadruplo[] getCodigo() {
+        return this.pila.toArray(new Cuadruplo[this.pila.size()]);
+        /*
+        for (Cuadruplo cuadruplo: this.pila) {
             aux += linea.toString() + "\n";
         }
         return aux;
+        */
     }
 }

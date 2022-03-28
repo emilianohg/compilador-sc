@@ -7,10 +7,6 @@ package Generador;
 
 import Sintactico.Nodo;
 
-/**
- *
- * @author Jose
- */
 public class AnalizadorCodigo {
     private Nodo raiz;
 

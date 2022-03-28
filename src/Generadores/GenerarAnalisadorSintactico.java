@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Generadores;
 
 import java.io.File;
@@ -13,10 +8,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java_cup.parser;
 
-/**
- *
- * @author Jose
- */
 public class GenerarAnalisadorSintactico {
 
     /**
@@ -26,7 +17,7 @@ public class GenerarAnalisadorSintactico {
 
         System.out.println("\n*** Generando ***\n");
 
-        String archLexico = "C:\\dev\\KidCode\\src\\Lexico\\kidcode.flex";;
+        String archLexico = "C:\\dev\\KidCode\\src\\Lexico\\Lexer.flex";;
         String archSintactico = "C:\\dev\\KidCode\\src\\Sintactico\\Gramatica.cup";;
         String[] alexico = {archLexico};
         String[] asintactico = {"-parser", "AnalizadorSintactico", archSintactico};

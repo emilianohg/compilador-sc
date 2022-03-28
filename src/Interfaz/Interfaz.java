@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Interfaz;
 
 import Generador.Buscador;
@@ -47,11 +42,8 @@ import javax.swing.JScrollBar;
 import javax.swing.text.Document;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
+import java.util.ArrayList;
 
-/**
- *
- * @author Jose
- */
 public class Interfaz extends javax.swing.JFrame {
 
     int conLinea = 1;
@@ -60,6 +52,7 @@ public class Interfaz extends javax.swing.JFrame {
     enum TypeConsoleMessage {
         ERROR, INFO
     };
+    private ArrayList<Identifier> tablaIdentificadores;
 
     public Interfaz() {
         initComponents();
@@ -68,7 +61,7 @@ public class Interfaz extends javax.swing.JFrame {
         splitPaneEC.setDividerLocation(0.70);
         txtCode.requestFocus();
         btnAnalizadorLexico.setVisible(true);
-        //consola.setVisible(false);
+        tablaIdentificadores = new ArrayList<>();
 
         SimpleAttributeSet attribs = new SimpleAttributeSet();
         StyleConstants.setAlignment(attribs, StyleConstants.ALIGN_RIGHT);
@@ -394,8 +387,7 @@ public class Interfaz extends javax.swing.JFrame {
             datos = "node" + n.getNumeroGuia() + "[label=\"" + n.getNombreRaiz() + "\"]";
         } else {
             //Hoja
-            if (n.getNombreRaiz().equals("VALOR_STRING")) {
-                System.out.println("STRING = " + n.getValor());
+            if (n.getNombreRaiz().equals("TEXT")) {
                 String valor = n.getValor().replace("\"", "");
                 datos += "node" + n.getNumeroGuia() + "[label=\"" + n.getNombreRaiz() + "\n<" + valor + "> \"]";
             } else {
@@ -528,9 +520,6 @@ public class Interfaz extends javax.swing.JFrame {
 
     private void btnAnalizadorSintacticoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnalizadorSintacticoActionPerformed
         
-        splitPaneCentral.getBottomComponent().setVisible(true);
-        splitPaneCentral.setDividerLocation(0.60);
-
         txtErrores.setText("");
         String codigo = txtCode.getText();
         Reader reader = new BufferedReader(new BufferedReader(new StringReader(codigo)));
@@ -606,20 +595,20 @@ public class Interfaz extends javax.swing.JFrame {
             }
             AnalizadorSemantico semantico = new AnalizadorSemantico();
 
-            semantico.rastrearProduccion("DECLARACION", sintactico_a.nodoPrincipal, "NOMBRE_VAR");
-            semantico.rastrearProduccion("ASIGNACION", sintactico_a.nodoPrincipal, "NOMBRE_VAR");
+            semantico.rastrearProduccion("DECLARACION", sintactico_a.nodoPrincipal, "IDENTIFIER");
+            semantico.rastrearProduccion("ASIGNACION", sintactico_a.nodoPrincipal, "IDENTIFIER");
 
-            semantico.rastrearProduccion("DECL_ASIG_CICLO", sintactico_a.nodoPrincipal, "NOMBRE_VAR");
-            semantico.rastrearProduccion("ASIGNACION_CICLO", sintactico_a.nodoPrincipal, "NOMBRE_VAR");
-            semantico.rastrearProduccion("VARIABLE_DA", sintactico_a.nodoPrincipal, "NOMBRE_VAR");
+            semantico.rastrearProduccion("DECL_ASIG_CICLO", sintactico_a.nodoPrincipal, "IDENTIFIER");
+            semantico.rastrearProduccion("ASIGNACION_CICLO", sintactico_a.nodoPrincipal, "IDENTIFIER");
+            semantico.rastrearProduccion("VARIABLE_DA", sintactico_a.nodoPrincipal, "IDENTIFIER");
 
-            semantico.rastrearProduccion("TIPO_VALOR", sintactico_a.nodoPrincipal, "NOMBRE_VAR");
-            semantico.rastrearProduccion("LEER_DATO", sintactico_a.nodoPrincipal, "NOMBRE_VAR");
-            semantico.rastrearProduccion("ASIGNACION_INC_DEC", sintactico_a.nodoPrincipal, "NOMBRE_VAR");
+            semantico.rastrearProduccion("TIPO_VALOR", sintactico_a.nodoPrincipal, "IDENTIFIER");
+            semantico.rastrearProduccion("LEER_DATO", sintactico_a.nodoPrincipal, "IDENTIFIER");
+            semantico.rastrearProduccion("ASIGNACION_INC_DEC", sintactico_a.nodoPrincipal, "IDENTIFIER");
 
-            semantico.rastrearProduccion("CONDICION_BAJA", sintactico_a.nodoPrincipal, "NOMBRE_VAR");
-            semantico.rastrearProduccion("CONDICION_MEDIA", sintactico_a.nodoPrincipal, "NOMBRE_VAR");
-            semantico.rastrearProduccion("CONDICION_ALTA", sintactico_a.nodoPrincipal, "NOMBRE_VAR");
+            semantico.rastrearProduccion("CONDICION_BAJA", sintactico_a.nodoPrincipal, "IDENTIFIER");
+            semantico.rastrearProduccion("CONDICION_MEDIA", sintactico_a.nodoPrincipal, "IDENTIFIER");
+            semantico.rastrearProduccion("CONDICION_ALTA", sintactico_a.nodoPrincipal, "IDENTIFIER");
 
             if (!semantico.listaErrores.isEmpty()) {
                 splitPaneCentral.getBottomComponent().setVisible(true);
@@ -645,6 +634,7 @@ public class Interfaz extends javax.swing.JFrame {
         
         if (this.arbolSintactico != null) {
             CodigoIntermedio ci = new CodigoIntermedio();
+            System.out.println("HOLA");
             ci.recorrerArbolSintactico(this.arbolSintactico);
             ci.imprimirCodigo();
             vizCodigo vCodigo = new vizCodigo(ci.getCodigo());

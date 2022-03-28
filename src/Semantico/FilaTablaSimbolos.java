@@ -7,10 +7,6 @@ package Semantico;
 
 import java_cup.runtime.Symbol;
 
-/**
- *
- * @author Jose
- */
 public class FilaTablaSimbolos {
 
     private String produccionRaiz;

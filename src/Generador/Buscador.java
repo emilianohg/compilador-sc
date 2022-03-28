@@ -8,10 +8,6 @@ package Generador;
 import Sintactico.Nodo;
 import java.util.Stack;
 
-/**
- *
- * @author Jose
- */
 public class Buscador {
 
     private Nodo raiz;

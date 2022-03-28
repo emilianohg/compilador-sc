@@ -1,16 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package pruebas;
 
 import java.util.ArrayList;
 
-/**
- *
- * @author Jose
- */
 public class NewMain1 {
 
     /**
@@ -23,7 +14,7 @@ public class NewMain1 {
             "error",
             "PAL_INICIO_PROG",
             "PAL_FIN_PROG",
-            "PAL_VARIABLE",
+            "VARIABLE",
             "PAL_GRUPO",
             "LEER",
             "IMPRIMIR",
@@ -33,9 +24,9 @@ public class NewMain1 {
             "CICLO_MIENTRAS",
             "INICIO_CICLO",
             "FIN_MIENTRAS",
-            "CONDICION_SI",
+            "IF_STATEMENT",
             "CONDICION_INICIO",
-            "CONDICION_SINO",
+            "ELSE_STATEMENT",
             "CONDICION_FIN",
             "OPER_REL",
             "OPER_ART_SUMA",
@@ -44,19 +35,19 @@ public class NewMain1 {
             "OPER_ART_DIV",
             "OPER_ASIG_IGUAL",
             "OPER_ASIG_InDe",
-            "OPER_AGRUP_PI",
-            "OPER_AGRUP_PF",
-            "OPER_AGRUP_LLI",
-            "OPER_AGRUP_LLF",
+            "PAREN_OPEN",
+            "PAREN_CLOSE",
+            "CURLY_BRACE_OPEN",
+            "CURLY_BRACE_CLOSE",
             "OPER_AGRUP_CI",
             "OPER_AGRUP_CF",
             "OPER_AGRUP_COMA",
             "VALOR_ENT",
-            "VALOR_FLO",
-            "VALOR_STRING",
+            "NUMBER_FLOAT",
+            "TEXT",
             "VALOR_LOG",
-            "NOMBRE_VAR",
-            "PUNTOYCOMA",
+            "IDENTIFIER",
+            "SEMICOLON",
             "ERROR"
         };
         String[] noTerminalNames = new String[]{
