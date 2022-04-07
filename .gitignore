@@ -1,6 +1,8 @@
-/build/
-/dist
+/build/*
+/dist/*
 /src/pruebas
 /src/img/Arbol.dot
 /src/img/Arbol.png
 /librerias
+build/classes/img/Arbol.dot
+src/img/Arbol.dot
