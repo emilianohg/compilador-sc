@@ -8,8 +8,10 @@ public class ModalCuadruplos extends javax.swing.JFrame {
     public ModalCuadruplos(Cuadruplo[] cuadruplos) {
         initComponents();
         DefaultTableModel modelo = (DefaultTableModel) jTableCuadruplos.getModel();
-        for(Cuadruplo cuadruplo: cuadruplos){
+        for (int i = 0; i < cuadruplos.length; i++) {
+            Cuadruplo cuadruplo = cuadruplos[i];
             Object[] row1 = {
+                i,
                 cuadruplo.getOperator(),
                 cuadruplo.getArg0(),
                 cuadruplo.getArg1(),
@@ -47,11 +49,11 @@ public class ModalCuadruplos extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Operador", "Argumento 1", "Argumento 2", "Resultado"
+                "Num", "Operador", "Argumento 1", "Argumento 2", "Resultado"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -65,6 +67,7 @@ public class ModalCuadruplos extends javax.swing.JFrame {
             jTableCuadruplos.getColumnModel().getColumn(1).setResizable(false);
             jTableCuadruplos.getColumnModel().getColumn(2).setResizable(false);
             jTableCuadruplos.getColumnModel().getColumn(3).setResizable(false);
+            jTableCuadruplos.getColumnModel().getColumn(4).setResizable(false);
         }
 
         getContentPane().add(jScrollPane2, java.awt.BorderLayout.CENTER);

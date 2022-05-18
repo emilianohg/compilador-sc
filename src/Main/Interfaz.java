@@ -63,7 +63,6 @@ public class Interfaz extends javax.swing.JFrame {
         txtNumLinea.setParagraphAttributes(attribs, true);
 
         ThreadNumberCode nC = new ThreadNumberCode();
-        /*
         String text = "var pi = 3.1416;\n" +
                 "var radio = 1;\n" +
                 "\n" +
@@ -72,11 +71,13 @@ public class Interfaz extends javax.swing.JFrame {
                 "} else {\n" +
                 "    radio = pi + 1;\n" +
                 "};";
-        */
+
+        /*
         String text = "var pi = 3.1416;\n" +
                 "var radio = 1;\n" +
                 "var area = 0;\n" +
                 "area = pi + radio + pi;";
+        */
         
         txtCode.setText(text);
         nC.start();

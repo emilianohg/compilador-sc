@@ -178,37 +178,89 @@ public class CodigoIntermedio {
                 String operando2 = ((Nodo) parametros.pop()).getValor();
                 String operador = simOperRel(((Nodo) parametros.pop()).getValor());
                 String operando1 = ((Nodo) parametros.pop()).getValor();
+                
+                System.out.println("OPEEEEERRRRAAAAADOOOOORRRRRR");
+                System.out.println(operador);
+                
+                String res = "t" + this.gvtemporal;
                                 
                 this.pila.add(
                     new Cuadruplo(
                         "MIN",
                         ""+operando1,
                         ""+operando2,
-                        "t" + this.gvtemporal
+                        res
                     )
                 );
                 
-                break;
-            case "BEGIN_IF":
-                this.getemporal++;
-                String var1 = this.obtenerResultadoAnterior();
                 this.pila.add(
                     new Cuadruplo(
                         "CMP",
-                        "" + var1,
+                        "" + res,
                         "0",
                         "NULL"
                     )
                 );
-                this.pila.add(
-                    new Cuadruplo(
-                        "JE",
-                        "L" + this.getemporal,
-                        "NULL",
-                        "NULL"
-                    )
-                );
+                
+                this.getemporal++;
+                
+                if(operador.equals("==")) {
+                    this.pila.add(
+                        new Cuadruplo(
+                            "JE",
+                            "L" + this.getemporal,
+                            "NULL",
+                            "NULL"
+                        )
+                    );
+                }
+                
+                if(operador.equals("<")) {
+                    this.pila.add(
+                        new Cuadruplo(
+                            "JL",
+                            "L" + this.getemporal,
+                            "NULL",
+                            "NULL"
+                        )
+                    );
+                }
+                
+                if(operador.equals("<=")) {
+                    this.pila.add(
+                        new Cuadruplo(
+                            "JLE",
+                            "L" + this.getemporal,
+                            "NULL",
+                            "NULL"
+                        )
+                    );
+                }
+                
+                if(operador.equals(">")) {
+                    this.pila.add(
+                        new Cuadruplo(
+                            "JG",
+                            "L" + this.getemporal,
+                            "NULL",
+                            "NULL"
+                        )
+                    );
+                }
+                
+                if(operador.equals(">=")) {
+                    this.pila.add(
+                        new Cuadruplo(
+                            "JGE",
+                            "L" + this.getemporal,
+                            "NULL",
+                            "NULL"
+                        )
+                    );
+                }
+                
                 this.labels.push(this.getemporal);
+                
                 break;
             case "BEGIN_ELSE":
                 int label = this.labels.pop();
@@ -283,6 +335,11 @@ public class CodigoIntermedio {
     private String obtenerResultadoAnterior() {
         Cuadruplo linea = this.pila.get(this.pila.size() - 1);        
         return linea.getRes();
+    }
+    
+    private String obtenerOperadorAnterior() {
+        Cuadruplo linea = this.pila.get(this.pila.size() - 1);        
+        return linea.getOperator();
     }
 
     private String simOperRel(String operador) {

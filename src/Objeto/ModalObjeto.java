@@ -7,6 +7,7 @@ import Utils.NumberUtils;
 public final class ModalObjeto extends javax.swing.JFrame {
     
     private String binary;
+    private String instruction;
     private Identifier[] identifiers;
     private Cuadruplo[] cuadruplos;
 
@@ -22,7 +23,7 @@ public final class ModalObjeto extends javax.swing.JFrame {
         this.identifiers = identifiers;
         this.cuadruplos = cuadruplos;
         
-        for(Cuadruplo cuadruplo: cuadruplos) {
+        for(Cuadruplo cuadruplo: this.cuadruplos) {
             if(cuadruplo.getOperator().equals("ADD")) {
                 this.setValueOn("EAX", cuadruplo.getArg0());
                 
@@ -117,14 +118,109 @@ public final class ModalObjeto extends javax.swing.JFrame {
                 // 100010dw oorrrmmm
                 this.addBinary("MOV [EDX], EAX\n");
                 this.addBinary("10001001 11000010\n");                
-            */
+                */
             }
+            
+            if (cuadruplo.getOperator().equals("CMP")) {
+                this.setValueOn("EAX", cuadruplo.getArg0());
                 
+                // CMP
+                // 100000sw oo111mmm
+                this.addBinary("CMP EAX, 0\n");
+                this.addBinary("11110111 11111011 00000000\n");
+                
+                this.addBinary("\n");
+            }
+            
+            if (cuadruplo.getOperator().equals("JE")) {
+                int position = this.findLabel(cuadruplo.getArg0());
+                // JE
+                // 01110100
+                this.addBinary("JE "+cuadruplo.getArg0()+"\n");
+                this.addBinary("01110100 "+this.parseDecimalToBinaryNotation(position)+"\n");
+                
+                this.addBinary("\n");
+            }
+            
+            if (cuadruplo.getOperator().equals("JL")) {
+                int position = this.findLabel(cuadruplo.getArg0());
+                // JL
+                // 01111100
+                this.addBinary("JL "+cuadruplo.getArg0()+"\n");
+                this.addBinary("01111100 "+this.parseDecimalToBinaryNotation(position)+"\n");
+                
+                this.addBinary("\n");
+            }
+            
+            if (cuadruplo.getOperator().equals("JL")) {
+                int position = this.findLabel(cuadruplo.getArg0());
+                // JL
+                // 01111100
+                this.addBinary("JL "+cuadruplo.getArg0()+"\n");
+                this.addBinary("01111100 "+this.parseDecimalToBinaryNotation(position)+"\n");
+                
+                this.addBinary("\n");
+            }
+            
+            if (cuadruplo.getOperator().equals("JLE")) {
+                int position = this.findLabel(cuadruplo.getArg0());
+                // JLE
+                // 01111110
+                this.addBinary("JLE "+cuadruplo.getArg0()+"\n");
+                this.addBinary("01111110 "+this.parseDecimalToBinaryNotation(position)+"\n");
+                
+                this.addBinary("\n");
+            }
+            
+            if (cuadruplo.getOperator().equals("JG")) {
+                int position = this.findLabel(cuadruplo.getArg0());
+                // JG
+                // 01111111
+                this.addBinary("JG "+cuadruplo.getArg0()+"\n");
+                this.addBinary("01111111 "+this.parseDecimalToBinaryNotation(position)+"\n");
+                
+                this.addBinary("\n");
+            }
+            
+            if (cuadruplo.getOperator().equals("JGE")) {
+                int position = this.findLabel(cuadruplo.getArg0());
+                // JGE
+                // 01111101
+                this.addBinary("JGE "+cuadruplo.getArg0()+"\n");
+                this.addBinary("01111101 "+this.parseDecimalToBinaryNotation(position)+"\n");
+                
+                this.addBinary("\n");
+            }
+            
+            if (cuadruplo.getOperator().equals("GOTO")) {
+                int position = this.findLabel(cuadruplo.getArg0());
+                // JE
+                // 01110100
+                this.addBinary("JUMP "+cuadruplo.getArg0()+"\n");
+                this.addBinary("11101001 "+this.parseDecimalToBinaryNotation(position)+"\n");
+                
+                this.addBinary("\n");
+            }
                 
         }
         
         textObjeto.setText(this.getBinary());
         
+    }
+    
+    public int findLabel(String label) {
+        int position = 0;
+                
+        for(int i = 0; i < this.cuadruplos.length; i++) {
+            if(
+                this.cuadruplos[i].getOperator().equals("LABEL") 
+                && this.cuadruplos[i].getArg0().equals(this.cuadruplos[i].getArg0())
+            ) {
+                position = i;
+            }
+        }
+
+        return position;
     }
     
     // SUSTITUIR POR SET DATA ON
@@ -235,6 +331,10 @@ public final class ModalObjeto extends javax.swing.JFrame {
         // 100010dw oorrrmmm
         this.addBinary("MOV EBX, [EDX]\n");
         this.addBinary("10001011 11011010\n");
+    }
+    
+    public void addInstruction(String instruction) {
+        this.instruction += instruction;
     }
     
     public void addBinary(String binary) {
