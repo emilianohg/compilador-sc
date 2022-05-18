@@ -116,6 +116,7 @@ public class CodigoIntermedio {
                     
                     this.saveIdentifier(var1, valor);
                     
+                    /*
                     this.pila.add(
                         new Cuadruplo(
                             "MOV",
@@ -124,6 +125,7 @@ public class CodigoIntermedio {
                             "NULL"
                         )
                     );
+                    */
 
                 } else {
                     Stack<Object> auxpila = new Stack<>();
@@ -155,8 +157,8 @@ public class CodigoIntermedio {
                         this.pila.add(
                             new Cuadruplo(
                                 "MOV",
-                                "t" + this.gvtemporal,
                                 valor,
+                                "t" + this.gvtemporal,
                                 "NULL"
                             )
                         );

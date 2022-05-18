@@ -2,12 +2,10 @@ package Main;
 
 import Intermedio.Identifier;
 import Intermedio.CodigoIntermedio;
-import Intermedio.Cuadruplo;
 import Intermedio.ModalCuadruplos;
 import Intermedio.ModalIdentifiers;
 import Lexico.AnalizadorLexico;
 import Lexico.PaintTextBox;
-import Objeto.ModalObjeto;
 import Semantico.AnalizadorSemantico;
 import java.io.BufferedReader;
 import java.io.File;
@@ -25,7 +23,6 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 import java.nio.file.Paths;
 import Sintactico.Nodo;
-import Utils.NumberUtils;
 import java.awt.Color;
 
 import java.io.FileWriter;
@@ -37,7 +34,7 @@ import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import java.util.ArrayList;
 
-public class Interfaz extends javax.swing.JFrame {
+public class Pantalla extends javax.swing.JFrame {
 
     int conLinea = 1;
     int linea = 0;
@@ -47,11 +44,9 @@ public class Interfaz extends javax.swing.JFrame {
     };
     private ArrayList<Identifier> tablaIdentificadores;
 
-    public Interfaz() {
+    public Pantalla() {
         initComponents();
         this.setLocationRelativeTo(null);
-        PnlToken.setVisible(true);
-        splitPaneEC.setDividerLocation(0.70);
         txtCode.requestFocus();
         btnAnalizadorLexico.setVisible(true);
         tablaIdentificadores = new ArrayList<>();
@@ -63,7 +58,6 @@ public class Interfaz extends javax.swing.JFrame {
         txtNumLinea.setParagraphAttributes(attribs, true);
 
         ThreadNumberCode nC = new ThreadNumberCode();
-        /*
         String text = "var pi = 3.1416;\n" +
                 "var radio = 1;\n" +
                 "\n" +
@@ -72,11 +66,6 @@ public class Interfaz extends javax.swing.JFrame {
                 "} else {\n" +
                 "    radio = pi + 1;\n" +
                 "};";
-        */
-        String text = "var pi = 3.1416;\n" +
-                "var radio = 1;\n" +
-                "var area = 0;\n" +
-                "area = pi + radio + pi;";
         
         txtCode.setText(text);
         nC.start();
@@ -102,17 +91,11 @@ public class Interfaz extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        splitPaneCentral = new javax.swing.JSplitPane();
         panelEditor = new javax.swing.JPanel();
-        splitPaneEC = new javax.swing.JSplitPane();
         jScrollPane2 = new javax.swing.JScrollPane();
         jPanel2 = new javax.swing.JPanel();
         txtCode = new javax.swing.JTextPane();
         txtNumLinea = new javax.swing.JTextPane();
-        PnlToken = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        TblAnalisis = new javax.swing.JTable();
-        jPanel1 = new javax.swing.JPanel();
         consola = new javax.swing.JPanel();
         PanelControlesSintactico = new javax.swing.JPanel();
         btnAnalizadorLexico = new javax.swing.JButton();
@@ -121,13 +104,14 @@ public class Interfaz extends javax.swing.JFrame {
         btnGeneradorCodigoIntermedio = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         txtErrores = new javax.swing.JTextPane();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        TblAnalisis = new javax.swing.JTable();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Lenguaje SC");
-        setPreferredSize(new java.awt.Dimension(1024, 700));
         setSize(new java.awt.Dimension(800, 600));
         addPropertyChangeListener(new java.beans.PropertyChangeListener() {
             public void propertyChange(java.beans.PropertyChangeEvent evt) {
@@ -135,19 +119,14 @@ public class Interfaz extends javax.swing.JFrame {
             }
         });
 
-        splitPaneCentral.setDividerSize(2);
-        splitPaneCentral.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
-
         panelEditor.setAutoscrolls(true);
         panelEditor.setPreferredSize(new java.awt.Dimension(458, 500));
         panelEditor.setLayout(new java.awt.BorderLayout());
 
-        splitPaneEC.setDividerLocation(200);
-        splitPaneEC.setDividerSize(2);
-
         jScrollPane2.setMinimumSize(new java.awt.Dimension(400, 19));
         jScrollPane2.setPreferredSize(new java.awt.Dimension(400, 52));
 
+        jPanel2.setPreferredSize(new java.awt.Dimension(588, 250));
         jPanel2.setLayout(new java.awt.BorderLayout());
 
         txtCode.setFont(new java.awt.Font("Consolas", 1, 14)); // NOI18N
@@ -170,52 +149,7 @@ public class Interfaz extends javax.swing.JFrame {
 
         jScrollPane2.setViewportView(jPanel2);
 
-        splitPaneEC.setLeftComponent(jScrollPane2);
-
-        PnlToken.setPreferredSize(new java.awt.Dimension(400, 100));
-        PnlToken.setLayout(new java.awt.BorderLayout());
-
-        jScrollPane1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Tokens", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Microsoft Sans Serif", 0, 12))); // NOI18N
-        jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
-        jScrollPane1.setPreferredSize(new java.awt.Dimension(200, 436));
-
-        TblAnalisis.setFont(new java.awt.Font("Roboto", 1, 12)); // NOI18N
-        TblAnalisis.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Linea", "Token", "Valor"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        TblAnalisis.setMinimumSize(new java.awt.Dimension(100, 0));
-        jScrollPane1.setViewportView(TblAnalisis);
-        if (TblAnalisis.getColumnModel().getColumnCount() > 0) {
-            TblAnalisis.getColumnModel().getColumn(0).setResizable(false);
-            TblAnalisis.getColumnModel().getColumn(1).setResizable(false);
-        }
-
-        PnlToken.add(jScrollPane1, java.awt.BorderLayout.CENTER);
-        jScrollPane1.getAccessibleContext().setAccessibleDescription("Tabla de simbolos");
-
-        jPanel1.setBackground(new java.awt.Color(247, 247, 247));
-        jPanel1.setPreferredSize(new java.awt.Dimension(10, 100));
-        jPanel1.setLayout(new java.awt.GridLayout(20, 0, 0, 2));
-        PnlToken.add(jPanel1, java.awt.BorderLayout.LINE_START);
-
-        splitPaneEC.setRightComponent(PnlToken);
-
-        panelEditor.add(splitPaneEC, java.awt.BorderLayout.CENTER);
-
-        splitPaneCentral.setTopComponent(panelEditor);
+        panelEditor.add(jScrollPane2, java.awt.BorderLayout.CENTER);
 
         consola.setPreferredSize(new java.awt.Dimension(10, 100));
         consola.setLayout(new java.awt.BorderLayout());
@@ -287,9 +221,33 @@ public class Interfaz extends javax.swing.JFrame {
 
         consola.add(jScrollPane3, java.awt.BorderLayout.CENTER);
 
-        splitPaneCentral.setBottomComponent(consola);
+        jScrollPane1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Tokens", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Microsoft Sans Serif", 0, 12))); // NOI18N
+        jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
+        jScrollPane1.setPreferredSize(new java.awt.Dimension(200, 436));
 
-        getContentPane().add(splitPaneCentral, java.awt.BorderLayout.CENTER);
+        TblAnalisis.setFont(new java.awt.Font("Roboto", 1, 12)); // NOI18N
+        TblAnalisis.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Linea", "Token", "Valor"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        TblAnalisis.setMinimumSize(new java.awt.Dimension(100, 0));
+        jScrollPane1.setViewportView(TblAnalisis);
+        if (TblAnalisis.getColumnModel().getColumnCount() > 0) {
+            TblAnalisis.getColumnModel().getColumn(0).setResizable(false);
+            TblAnalisis.getColumnModel().getColumn(1).setResizable(false);
+        }
 
         jMenuBar1.setBackground(new java.awt.Color(0, 0, 51));
         jMenuBar1.setForeground(new java.awt.Color(255, 255, 255));
@@ -309,6 +267,33 @@ public class Interfaz extends javax.swing.JFrame {
         jMenuBar1.add(jMenu1);
 
         setJMenuBar(jMenuBar1);
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(panelEditor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(consola, javax.swing.GroupLayout.PREFERRED_SIZE, 934, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(panelEditor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(consola, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+
+        jScrollPane1.getAccessibleContext().setAccessibleDescription("Tabla de simbolos");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -512,7 +497,7 @@ public class Interfaz extends javax.swing.JFrame {
             txtCode = lexico.estilo.componente;
 
         } catch (IOException ex) {
-            Logger.getLogger(Interfaz.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Pantalla.class.getName()).log(Level.SEVERE, null, ex);
         }
         TblAnalisis.setModel(modelo);
         this.writeMessageInConsole(
@@ -561,7 +546,7 @@ public class Interfaz extends javax.swing.JFrame {
                 try {
                     textoCargado = sintactico.estilo.doc.getText(0, tamTextoFinal);
                 } catch (BadLocationException ex1) {
-                    Logger.getLogger(Interfaz.class.getName()).log(Level.SEVERE, null, ex1);
+                    Logger.getLogger(Pantalla.class.getName()).log(Level.SEVERE, null, ex1);
                 }
                 String errores = "Error sintactico en :\n\t..." + codigo.substring(diezPorciento, sintactico.charErrorDetec());
                 this.writeMessageInConsole(
@@ -603,7 +588,7 @@ public class Interfaz extends javax.swing.JFrame {
                     "Se detectaron errores sintácticos. No se puede continuar",
                     TypeConsoleMessage.ERROR
                 );
-                Logger.getLogger(Interfaz.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(Pantalla.class.getName()).log(Level.SEVERE, null, ex);
             }
             AnalizadorSemantico semantico = new AnalizadorSemantico();
 
@@ -623,8 +608,6 @@ public class Interfaz extends javax.swing.JFrame {
             semantico.rastrearProduccion("CONDICION_ALTA", sintactico_a.nodoPrincipal, "IDENTIFIER");
 
             if (!semantico.listaErrores.isEmpty()) {
-                splitPaneCentral.getBottomComponent().setVisible(true);
-                splitPaneCentral.setDividerLocation(0.60);
                 String errores = "";
                 for (int i = 0; i < semantico.listaErrores.size(); i++) {
                     errores = semantico.listaErrores.get(i) + "\n";
@@ -648,26 +631,44 @@ public class Interfaz extends javax.swing.JFrame {
             CodigoIntermedio ci = new CodigoIntermedio();
             ci.recorrerArbolSintactico(this.arbolSintactico);
             ci.imprimirCodigo();
-            Cuadruplo[] cuadruplos = ci.getCodigo();
+            ModalCuadruplos vCodigo = new ModalCuadruplos(ci.getCodigo());
             
-            ModalCuadruplos vCodigo = new ModalCuadruplos(cuadruplos);
-                        
             Identifier[] identifiers = ci.getIdentifiers();
             for(Identifier ident : identifiers) {
                 System.out.println(ident);
             }
             ModalIdentifiers vIdentifiers = new ModalIdentifiers(identifiers);
             
-            ModalObjeto vObjeto = new ModalObjeto(cuadruplos, identifiers);
-
-            
             vIdentifiers.show();
             vCodigo.show();
-            vObjeto.show();
         }
     }//GEN-LAST:event_btnGeneradorCodigoIntermedioActionPerformed
 
-
+//    private String mapearArbol(Nodo raiz) {
+//        String datos = "";
+//        //es raiz?
+//        if (!raiz.getHojas().isEmpty()) {
+//            for (Nodo hoja : raiz.getHojas()) {
+//                String nodoHoja = mapearArbol(hoja);
+//                String  nodoRaiz = tipoNodo(raiz) + " -> " + tipoNodo(hoja) + ";";
+//                datos += nodoRaiz+"\n";
+//                datos += nodoHoja+"\n";
+//            }
+//        }
+//        return datos;
+//    }
+//    
+//    private String tipoNodo(Nodo n) {
+//        String datos = "";
+//        if (n.getValor().isEmpty()) {
+//            //Raiz
+//            datos = "\""+ n.getNombreRaiz() + "\"";
+//        } else {
+//            //Hoja
+//            datos += "\"" + n.getNombreRaiz() + "\n<" + n.getValor() + "> \"";
+//        }
+//        return datos;
+//    }
     private boolean errorLexico() {
         String codigo = txtCode.getText();
 
@@ -690,7 +691,7 @@ public class Interfaz extends javax.swing.JFrame {
                     return true;
                 }
             } catch (IOException ex) {
-                Logger.getLogger(Interfaz.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(Pantalla.class.getName()).log(Level.SEVERE, null, ex);
             }
 
         }
@@ -715,7 +716,7 @@ public class Interfaz extends javax.swing.JFrame {
                     txtNumLinea.setText(numeros);
                     sleep(100);
                 } catch (InterruptedException ex) {
-                    Logger.getLogger(Interfaz.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(Pantalla.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         }
@@ -751,27 +752,27 @@ public class Interfaz extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Interfaz.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Pantalla.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Interfaz.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Pantalla.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Interfaz.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Pantalla.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Interfaz.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Pantalla.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Interfaz().setVisible(true);
+                new Pantalla().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel PanelControlesSintactico;
-    private javax.swing.JPanel PnlToken;
     private javax.swing.JTable TblAnalisis;
     private javax.swing.JButton btnAnalizadorLexico;
     private javax.swing.JButton btnAnalizadorSemantico;
@@ -781,14 +782,11 @@ public class Interfaz extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JPanel panelEditor;
-    private javax.swing.JSplitPane splitPaneCentral;
-    private javax.swing.JSplitPane splitPaneEC;
     private javax.swing.JTextPane txtCode;
     private javax.swing.JTextPane txtErrores;
     private javax.swing.JTextPane txtNumLinea;
