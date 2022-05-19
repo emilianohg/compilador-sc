@@ -26,6 +26,7 @@ import javax.swing.table.DefaultTableModel;
 import java.nio.file.Paths;
 import Sintactico.Nodo;
 import Utils.NumberUtils;
+import img.Gramatica;
 import java.awt.Color;
 
 import java.io.FileWriter;
@@ -120,6 +121,8 @@ public class Interfaz extends javax.swing.JFrame {
         btnAnalizadorSintactico = new javax.swing.JButton();
         btnAnalizadorSemantico = new javax.swing.JButton();
         btnGeneradorCodigoIntermedio = new javax.swing.JButton();
+        btnGeneradorCodigoObjeto = new javax.swing.JButton();
+        btnGramatica = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         txtErrores = new javax.swing.JTextPane();
         jMenuBar1 = new javax.swing.JMenuBar();
@@ -252,6 +255,20 @@ public class Interfaz extends javax.swing.JFrame {
             }
         });
 
+        btnGeneradorCodigoObjeto.setText("Generar código objeto");
+        btnGeneradorCodigoObjeto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGeneradorCodigoObjetoActionPerformed(evt);
+            }
+        });
+
+        btnGramatica.setText("Ver gramatica");
+        btnGramatica.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGramaticaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout PanelControlesSintacticoLayout = new javax.swing.GroupLayout(PanelControlesSintactico);
         PanelControlesSintactico.setLayout(PanelControlesSintacticoLayout);
         PanelControlesSintacticoLayout.setHorizontalGroup(
@@ -265,6 +282,10 @@ public class Interfaz extends javax.swing.JFrame {
                 .addComponent(btnAnalizadorSemantico)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnGeneradorCodigoIntermedio)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnGeneradorCodigoObjeto)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnGramatica)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         PanelControlesSintacticoLayout.setVerticalGroup(
@@ -275,8 +296,10 @@ public class Interfaz extends javax.swing.JFrame {
                     .addComponent(btnAnalizadorSintactico)
                     .addComponent(btnAnalizadorSemantico)
                     .addComponent(btnGeneradorCodigoIntermedio)
-                    .addComponent(btnAnalizadorLexico))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnAnalizadorLexico)
+                    .addComponent(btnGeneradorCodigoObjeto)
+                    .addComponent(btnGramatica))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
 
         consola.add(PanelControlesSintactico, java.awt.BorderLayout.PAGE_START);
@@ -362,6 +385,7 @@ public class Interfaz extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
+    /*
     private void generarArbolSintaxis(AnalizadorSintactico analisis) {
         Nodo raiz = analisis.nodoPrincipal;
         String datos = mapearArbolIni(raiz);
@@ -369,6 +393,7 @@ public class Interfaz extends javax.swing.JFrame {
         Graficar(datos + "\n" + datos1, "Arbol");
 
     }
+    */
 
     //inicializa los nodos para poder unir sin dupliciadad
     private String mapearArbolIni(Nodo raiz) {
@@ -421,7 +446,7 @@ public class Interfaz extends javax.swing.JFrame {
         return datos;
     }
 
-    private void Graficar(String cadena, String cad) {
+    private void showGramatica(String cadena, String cad) {
 
         FileWriter fichero = null;
         PrintWriter pw = null;
@@ -546,7 +571,7 @@ public class Interfaz extends javax.swing.JFrame {
 
             sintactico.parse();
             arbolSintactico = sintactico.nodoPrincipal;
-            generarArbolSintaxis(sintactico);
+            // generarArbolSintaxis(sintactico);
 
             this.writeMessageInConsole(
                 "Analisis sintáctico finalizado con exito",
@@ -658,15 +683,36 @@ public class Interfaz extends javax.swing.JFrame {
                 System.out.println(ident);
             }
             ModalIdentifiers vIdentifiers = new ModalIdentifiers(identifiers);
-            
-            ModalObjeto vObjeto = new ModalObjeto(cuadruplos, identifiers);
-
-            
+                        
             vIdentifiers.show();
             vCodigo.show();
-            vObjeto.show();
         }
     }//GEN-LAST:event_btnGeneradorCodigoIntermedioActionPerformed
+
+    private void btnGeneradorCodigoObjetoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGeneradorCodigoObjetoActionPerformed
+        if (this.arbolSintactico == null) {
+            this.writeMessageInConsole("Ejecuta el analizador sintactico primero", TypeConsoleMessage.ERROR);
+            return;
+        }
+        
+        if (this.arbolSintactico != null) {
+            CodigoIntermedio ci = new CodigoIntermedio();
+            ci.recorrerArbolSintactico(this.arbolSintactico);
+            ci.imprimirCodigo();
+
+            Cuadruplo[] cuadruplos = ci.getCodigo();
+            Identifier[] identifiers = ci.getIdentifiers();
+            
+            ModalObjeto vObjeto = new ModalObjeto(cuadruplos, identifiers);
+            
+            vObjeto.show();
+        }
+    }//GEN-LAST:event_btnGeneradorCodigoObjetoActionPerformed
+
+    private void btnGramaticaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGramaticaActionPerformed
+        Gramatica gramatica = new Gramatica();
+        gramatica.show();
+    }//GEN-LAST:event_btnGramaticaActionPerformed
 
 
     private boolean errorLexico() {
@@ -778,6 +824,8 @@ public class Interfaz extends javax.swing.JFrame {
     private javax.swing.JButton btnAnalizadorSemantico;
     private javax.swing.JButton btnAnalizadorSintactico;
     private javax.swing.JButton btnGeneradorCodigoIntermedio;
+    private javax.swing.JButton btnGeneradorCodigoObjeto;
+    private javax.swing.JButton btnGramatica;
     private javax.swing.JPanel consola;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;

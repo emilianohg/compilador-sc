@@ -5,8 +5,13 @@
         <group>
             <file>file:/C:/dev/LenguajeSC/src/Main/Interfaz.java</file>
             <file>file:/C:/dev/LenguajeSC/src/Utils/NumberUtils.java</file>
-            <file>file:/C:/dev/LenguajeSC/src/Main/Pantalla.java</file>
+            <file>file:/C:/dev/LenguajeSC/src/Generadores/GenerarAnalisadorSintactico.java</file>
+            <file>file:/C:/dev/LenguajeSC/src/Intermedio/CodigoIntermedio.java</file>
+            <file>file:/C:/dev/LenguajeSC/src/img/Gramatica.java</file>
+            <file>file:/C:/dev/LenguajeSC/src/Intermedio/ModalCuadruplos.java</file>
             <file>file:/C:/dev/LenguajeSC/src/Objeto/ModalObjeto.java</file>
+            <file>file:/C:/dev/LenguajeSC/src/Generadores/GenerarAnalizadorLexico.java</file>
+            <file>file:/C:/dev/LenguajeSC/src/Main/Pantalla.java</file>
         </group>
     </open-files>
 </project-private>
